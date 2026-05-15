@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://baeg0weytkeyi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rwas"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1975386178]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1682240116]
+shape = SubResource("RectangleShape2D_0rwas")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=535591398]
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=342257951]
+
+[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox" unique_id=1283332414]
+shape = SubResource("RectangleShape2D_xhfnw")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1788755235]
+
+[node name="StatsComponent" type="Node" parent="." unique_id=87154125]
+
+[node name="Weapon" type="Node" parent="." unique_id=975686145]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cltibw3ejn6ba"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1407316942]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771241619]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1209608117]
+
+[node name="StateMachine" type="Node" parent="." unique_id=694682964]
+
+[node name="Weapon" type="Node" parent="." unique_id=1008438202]

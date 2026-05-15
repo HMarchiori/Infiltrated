@@ -1,13 +1,12 @@
 
-
 ## Primeira Entrega (22/05)
 ##### Criar a primeira fase
 - Criar estrutura de nós para jogador, inimigo e disparos
-- Criar lógica básica de movimentação com WASD
+- Criar lógica básica de movimentação com WASD (8 direções)
 - Criar lógica de disparo de inimigos
 - Criar contador de quantos inimigos restam
-- Definir quando fase encerrou para abrir a porta/portal para nova fase
-- Criar uma nova fase com qualquer coisa só para ver se está trocando corretamente.
+- Definir quando fase encerrou para spawnar o portal de saída
+- Criar uma segunda sala qualquer só para confirmar que a troca funciona
 
 
 ## Arquitetura do Projeto (Godot)
@@ -21,23 +20,20 @@ No Godot, tudo é construído com **nodos**. Um nodo é a menor unidade do jogo 
 ```
 Game.tscn                  ← raiz da run, "cola" de tudo
 ├── RoomManager (Node)     ← instancia e destrói salas
-├── HUD (CanvasLayer)      ← vida e UI, fica colado na tela
+├── HUD (CanvasLayer)      ← score e UI, fica colado na tela
 └── Player (instância)     ← o João
 
-Room.tscn                  ← cada sala da mansão
+Room.tscn                  ← base para todas as salas
 ├── TileMapLayer           ← chão e paredes em tiles
-├── Doors (Node2D)         ← saídas Norte/Sul/Leste/Oeste
-├── EnemySpawner (Node)    ← controla spawn de inimigos
-├── PortalPoints (Node2D)  ← posições válidas para portais
-└── LootTable (Node)       ← itens dropados ao limpar a sala
+├── EnemySpawner (Node)    ← spawna os inimigos da sala
+├── SpawnPoint (Marker2D)  ← posição inicial do jogador
+└── PortalSpawn (Marker2D) ← onde o portal de saída aparece ao limpar a sala
 
 Player.tscn
 └── CharacterBody2D        ← nodo raiz: anda e colide
     ├── Sprite2D            ← imagem do João
     ├── CollisionShape2D    ← corpo invisível que bate nas paredes
-    ├── StatsComponent      ← HP, velocidade, recursos
-    ├── CameraWeapon        ← lógica da arma câmera
-    ├── PortalWeapon        ← lógica d'O Limiar
+    ├── CameraWeapon (Node) ← lógica da arma câmera
     ├── Hurtbox (Area2D)    ← detecta dano recebido
     └── Camera2D            ← câmera que segue o jogador
 
@@ -45,14 +41,19 @@ Enemy.tscn
 └── CharacterBody2D
     ├── Sprite2D
     ├── CollisionShape2D
-    ├── StateMachine        ← Idle / Chase / Attack
-    └── Hurtbox (Area2D)
+    ├── StateMachine (Node) ← Idle / Chase / Attack
+    └── Hurtbox (Area2D)   ← detecta dano recebido
 
-Portal.tscn
-└── Area2D                 ← detecta quando algo entra
-    ├── Sprite2D + AnimationPlayer
-    ├── CollisionShape2D
-    └── @export exit_portal ← referência ao portal de saída
+Projectile.tscn
+└── Area2D                 ← detecta colisão com Hurtbox
+    ├── Sprite2D
+    └── CollisionShape2D
+
+PortalSaida.tscn           ← spawna ao limpar a sala, leva à próxima
+└── Area2D                 ← detecta quando o jogador entra
+    ├── Sprite2D
+    ├── AnimationPlayer     ← animação de pulsar/brilhar
+    └── CollisionShape2D
 ```
 
 ### Nodo raiz por tipo de cena
@@ -71,22 +72,45 @@ Singletons são scripts que ficam sempre vivos durante o jogo inteiro, acessíve
 
 | Singleton | Responsabilidade |
 |-----------|-----------------|
-| `GameState.gd` | seed da run, score, wave atual |
-| `UpgradeManager.gd` | pool de upgrades, lógica de seleção e aplicação |
+| `GameState.gd` | score, sala atual, upgrades acumulados da run |
 | `EventBus.gd` | signals globais desacoplados entre cenas |
-| `RoomRegistry.gd` | lista de cenas de salas disponíveis para sorteio |
 
 ### Fluxo de uma Run
 
 ```
-1. GameState.new_run(seed)       → gera seed aleatória
-2. RoomManager.build_run()       → sorteia e ordena salas do RoomRegistry
-3. Room instanciada              → Player spawna na posição inicial
-4. Combate                       → jogador limpa a sala
-5. EventBus.room_cleared.emit()  → sinal dispara ao matar todos os inimigos
-6. UpgradeScreen                 → jogador escolhe 1 de 3 upgrades
-7. Próxima sala                  → repete até boss ou game over
+1. Game.tscn carrega          → RoomManager instancia a Sala 1 (Sala de Rituais, sempre fixa)
+2. Player spawna no SpawnPoint
+3. Combate                    → jogador elimina todos os inimigos
+4. EventBus.sala_limpa.emit() → contador de inimigos chega a zero
+5. PortalSaida spawna no centro da sala
+6. UpgradeScreen              → jogador escolhe 1 de 3 upgrades
+7. Jogador passa pelo portal  → RoomManager carrega próxima sala (aleatória)
+8. Repete até a Sala 5        → boss final
+9. Game over ou vitória
 ```
+
+### Salas
+
+| Sala | Tipo | Inimigos |
+|------|------|----------|
+| 1 | Sala de Rituais (sempre fixa) | 6 |
+| 2 | Aleatória | 8 |
+| 3 | Aleatória | 10 |
+| 4 | Aleatória | 12 |
+| 5 | Boss | 14 + boss |
+
+### Upgrades (escolha 1 ao concluir cada sala)
+
+- +25% fire rate da câmera
+- +20% velocidade de movimento
+- +20% dano nos projéteis
+
+Os upgrades acumulam durante a run e resetam ao morrer.
+
+### Pontuação
+
+- +100 pontos por inimigo abatido
+- Score exibido no HUD e na tela de vitória/game over
 
 ### Movimento do Player (GDScript)
 
@@ -96,16 +120,10 @@ extends CharacterBody2D
 var speed = 200
 
 func _physics_process(delta):
-    var direcao = Vector2.ZERO
-
-    if Input.is_action_pressed("ui_right"):
-        direcao.x = 1
-    if Input.is_action_pressed("ui_left"):
-        direcao.x = -1
-    if Input.is_action_pressed("ui_up"):
-        direcao.y = -1
-    if Input.is_action_pressed("ui_down"):
-        direcao.y = 1
+    var direcao = Vector2(
+        Input.get_axis("ui_left", "ui_right"),
+        Input.get_axis("ui_up", "ui_down")
+    )
 
     velocity = direcao.normalized() * speed
     move_and_slide()
@@ -113,15 +131,16 @@ func _physics_process(delta):
 
 ### Ordem de implementação sugerida
 
-1. Player se move nas 4 direções
+1. Player se move nas 8 direções
 2. Player bate nas paredes
-3. Inimigo aparece na sala
-4. Player atira
-5. Tiro mata inimigo
-6. Sala é gerada aleatoriamente
-7. Sistema de upgrades
-8. HUD e pontuação
-9. Mecânica de portais
+3. Player atira (CameraWeapon)
+4. Inimigo aparece na sala e persegue o jogador
+5. Inimigo atira no jogador
+6. Tiro mata inimigo (Hurtbox + contador)
+7. Portal de saída spawna ao zerar inimigos
+8. Portal leva para a próxima sala (RoomManager)
+9. Tela de upgrade entre salas
+10. HUD com score e a tela de game over / vitória
 
 ---
 
@@ -137,25 +156,29 @@ infiltrated/
 │   │   ├── Player.tscn
 │   │   └── Player.gd
 │   ├── enemies/
-│   │   ├── BaseEnemy.tscn
+│   │   ├── Enemy.tscn
 │   │   ├── Capanga.tscn
 │   │   └── Lider.tscn
 │   ├── rooms/
 │   │   ├── Room.tscn
-│   │   ├── RoomCombate01.tscn
-│   │   └── RoomBoss.tscn
+│   │   ├── Sala1Rituais.tscn
+│   │   ├── Sala2.tscn
+│   │   ├── Sala3.tscn
+│   │   ├── Sala4.tscn
+│   │   └── Sala5Boss.tscn
 │   ├── weapons/
-│   │   ├── CameraWeapon.tscn
+│   │   ├── CameraWeapon.gd
 │   │   └── Projectile.tscn
+│   ├── portal/
+│   │   └── PortalSaida.tscn
 │   └── ui/
 │       ├── HUD.tscn
-│       └── UpgradeScreen.tscn
+│       ├── UpgradeScreen.tscn
+│       └── GameOver.tscn
 ├── scripts/
 │   └── autoloads/
 │       ├── GameState.gd
-│       ├── EventBus.gd
-│       ├── UpgradeManager.gd
-│       └── RoomRegistry.gd
+│       └── EventBus.gd
 ├── assets/
 │   ├── sprites/
 │   ├── audio/
