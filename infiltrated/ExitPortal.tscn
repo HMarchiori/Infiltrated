@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://d1y516ahtqlo5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ogjv"]
+[ext_resource type="Script" path="res://ExitPortal.gd" id="1_portalscript"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_portal"]
+radius = 30.0
 
 [node name="ExitPortal" type="Area2D" unique_id=506935242]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_portalscript")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1044069211]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1663749113]
-shape = SubResource("RectangleShape2D_6ogjv")
+shape = SubResource("CircleShape2D_portal")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=179015859]
