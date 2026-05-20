@@ -19,5 +19,6 @@ shape = SubResource("RectangleShape2D_xhfnw")
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=1788755235]
 
 [node name="StatsComponent" type="Node" parent="." unique_id=87154125]
+metadata/HP = 20
 
 [node name="Weapon" type="Node" parent="." unique_id=975686145]
