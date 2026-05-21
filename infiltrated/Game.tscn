@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://game_infiltrated"]
+
+[ext_resource type="Script" path="res://Game.gd" id="1_gamescript"]
+[ext_resource type="PackedScene" path="res://Room.tscn" id="2_roomscene"]
+[ext_resource type="PackedScene" path="res://Player.tscn" id="3_playerscene"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gamescript")
+
+[node name="Room" parent="." instance=ExtResource("2_roomscene")]
+
+[node name="Player" parent="." instance=ExtResource("3_playerscene")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 600.0
+offset_bottom = 60.0
+text = "Score: 0"

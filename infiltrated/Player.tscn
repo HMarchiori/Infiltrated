@@ -1,22 +1,37 @@
 [gd_scene format=3 uid="uid://baeg0weytkeyi"]
 
+[ext_resource type="Script" path="res://Player.gd" id="1_plscript"]
+[ext_resource type="PackedScene" path="res://Projectile.tscn" id="2_projscene"]
+[ext_resource type="Texture2D" path="res://Assets/01_crane_reporter.png" id="3_pltex"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rwas"]
+size = Vector2(18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
+size = Vector2(20, 20)
 
 [node name="Player" type="CharacterBody2D" unique_id=1975386178]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_plscript")
+bullet_scene = ExtResource("2_projscene")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1682240116]
 shape = SubResource("RectangleShape2D_0rwas")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=535591398]
+texture = ExtResource("3_pltex")
+scale = Vector2(0.07, 0.07)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=342257951]
+collision_layer = 0
+collision_mask = 0
 
 [node name="HitboxArea" type="CollisionShape2D" parent="Hitbox" unique_id=1283332414]
 shape = SubResource("RectangleShape2D_xhfnw")
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=1788755235]
+zoom = Vector2(2, 2)
 
 [node name="StatsComponent" type="Node" parent="." unique_id=87154125]
 metadata/HP = 20

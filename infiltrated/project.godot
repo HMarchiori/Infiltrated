@@ -13,6 +13,12 @@ config_version=5
 config/name="Infiltrated"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+run/main_scene="res://Game.tscn"
+
+[autoload]
+
+EventBus="*res://autoloads/EventBus.gd"
+GameState="*res://autoloads/GameState.gd"
 
 [physics]
 

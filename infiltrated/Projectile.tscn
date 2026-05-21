@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://dj62gaj2wrmfc"]
 
+[ext_resource type="Script" path="res://Projectile.gd" id="1_projscript"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6v2"]
+size = Vector2(6, 6)
 
 [node name="Projectile" type="Area2D" unique_id=1888702295]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_projscript")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=900713297]
 
