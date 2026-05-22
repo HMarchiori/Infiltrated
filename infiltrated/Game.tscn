@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b5kme2ubdm57p" path="res://Room.tscn" id="2_roomscene"]
 [ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_u44n3"]
+font_size = 48
+
 [node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
 
@@ -21,3 +24,4 @@ offset_top = 10.0
 offset_right = 600.0
 offset_bottom = 60.0
 text = "Score: 0"
+label_settings = SubResource("LabelSettings_u44n3")
