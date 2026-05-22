@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://game_infiltrated"]
+[gd_scene format=3 uid="uid://bmucmpvrb7wiv"]
 
-[ext_resource type="Script" path="res://Game.gd" id="1_gamescript"]
-[ext_resource type="PackedScene" path="res://Room.tscn" id="2_roomscene"]
-[ext_resource type="PackedScene" path="res://Player.tscn" id="3_playerscene"]
+[ext_resource type="Script" uid="uid://cyocoimkt2wgy" path="res://Game.gd" id="1_gamescript"]
+[ext_resource type="PackedScene" uid="uid://djy0t2gsp56b1" path="res://Room.tscn" id="2_roomscene"]
+[ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
 
-[node name="Room" parent="." instance=ExtResource("2_roomscene")]
+[node name="Room" parent="." unique_id=520296313 instance=ExtResource("2_roomscene")]
 
-[node name="Player" parent="." instance=ExtResource("3_playerscene")]
+[node name="Player" parent="." unique_id=2029011315 instance=ExtResource("3_playerscene")]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=90370623]
 
-[node name="ScoreLabel" type="Label" parent="HUD"]
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=1538594647]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 600.0
