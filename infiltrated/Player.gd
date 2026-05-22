@@ -6,6 +6,7 @@ const FIRE_RATE := 0.25
 @export var bullet_scene: PackedScene
 
 var _fire_timer: float = 0.0
+var _last_dir: Vector2 = Vector2.DOWN
 var hp: int = 20
 
 func _ready() -> void:
@@ -19,8 +20,11 @@ func _physics_process(delta: float) -> void:
 	velocity = dir.normalized() * SPEED
 	move_and_slide()
 
+	if dir != Vector2.ZERO:
+		_last_dir = dir.normalized()
+
 	_fire_timer -= delta
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and _fire_timer <= 0.0:
+	if Input.is_action_just_pressed("ui_accept") and _fire_timer <= 0.0:
 		_shoot()
 		_fire_timer = FIRE_RATE
 
@@ -29,7 +33,7 @@ func _shoot() -> void:
 		return
 	var bullet: Node2D = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized()
+	bullet.direction = _last_dir
 	bullet.from_player = true
 	get_tree().current_scene.add_child(bullet)
 

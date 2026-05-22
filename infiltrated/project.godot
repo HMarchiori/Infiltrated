@@ -11,14 +11,19 @@ config_version=5
 [application]
 
 config/name="Infiltrated"
+run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
-run/main_scene="res://Game.tscn"
 
 [autoload]
 
 EventBus="*res://autoloads/EventBus.gd"
 GameState="*res://autoloads/GameState.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [physics]
 
