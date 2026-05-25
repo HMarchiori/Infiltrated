@@ -18,10 +18,6 @@ func _ready() -> void:
 		collision_mask = 2
 	body_entered.connect(_on_body_entered)
 
-func _draw() -> void:
-	var cor := Color(1.0, 0.9, 0.2) if from_player else Color(1.0, 0.3, 0.2)
-	draw_circle(Vector2.ZERO, 5.0, cor)
-
 func _process(delta: float) -> void:
 	position += direction * SPEED * delta
 	_elapsed += delta
