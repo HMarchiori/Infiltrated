@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dj62gaj2wrmfc"]
 
 [ext_resource type="Script" path="res://Projectile.gd" id="1_projscript"]
+[ext_resource type="Texture2D" uid="uid://c8c85gdqsdvuu" path="res://Assets/09_eye_symbol.png" id="2_eyetex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6v2"]
 size = Vector2(6, 6)
@@ -11,6 +12,8 @@ collision_mask = 4
 script = ExtResource("1_projscript")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=900713297]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_eyetex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1411798696]
 shape = SubResource("RectangleShape2D_xh6v2")
