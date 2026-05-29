@@ -7,6 +7,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_u44n3"]
 font_size = 48
 
+[sub_resource type="LabelSettings" id="LabelSettings_lives"]
+font_size = 48
+font_color = Color(1, 0.2, 0.2, 1)
+
 [node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
 
@@ -23,3 +27,11 @@ offset_right = 600.0
 offset_bottom = 60.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_u44n3")
+
+[node name="LivesLabel" type="Label" parent="HUD" unique_id=1538594648]
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 110.0
+text = ""
+label_settings = SubResource("LabelSettings_lives")

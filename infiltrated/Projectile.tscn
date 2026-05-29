@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dj62gaj2wrmfc"]
 
-[ext_resource type="Script" path="res://Projectile.gd" id="1_projscript"]
+[ext_resource type="Script" uid="uid://bvxgrxsl3wmm2" path="res://Projectile.gd" id="1_projscript"]
 [ext_resource type="Texture2D" uid="uid://c8c85gdqsdvuu" path="res://Assets/09_eye_symbol.png" id="2_eyetex"]
+[ext_resource type="AudioStream" uid="uid://bxaw15kuj5t5e" path="res://Assets/eaglaxle-gun-shot-1-530788.mp3" id="3_1cf02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6v2"]
 size = Vector2(6, 6)
@@ -17,3 +18,6 @@ texture = ExtResource("2_eyetex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1411798696]
 shape = SubResource("RectangleShape2D_xh6v2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1007824563]
+stream = ExtResource("3_1cf02")
