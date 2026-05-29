@@ -10,10 +10,10 @@ const POSICOES: Array = [
 	Vector2(220, -180),
 	Vector2(-250,   50),
 	Vector2(250,   50),
-	Vector2(  0, -280),
+	Vector2(  50, -200),
 	Vector2(-200,  220),
 	Vector2(200,  220),
-	Vector2(  0,  280),
+	Vector2(  50,  280),
 ]
 
 func _ready() -> void:

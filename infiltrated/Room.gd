@@ -9,6 +9,7 @@ extends Node2D
 func _ready() -> void:
 	_criar_fronteiras()
 	EventBus.sala_limpa.connect(_on_sala_limpa)
+	EventBus.you_won.connect(_on_you_won)
 	spawner.spawnar(enemy_count)
 
 func _on_sala_limpa() -> void:
@@ -16,7 +17,10 @@ func _on_sala_limpa() -> void:
 		return
 	var portal: Node2D = portal_scene.instantiate()
 	portal.global_position = portal_spawn.global_position
-	add_child(portal)
+	call_deferred("add_child", portal)  # ← deferred
+
+func _on_you_won() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://you_won.tscn")
 
 func _criar_fronteiras() -> void:
 	var paredes := [

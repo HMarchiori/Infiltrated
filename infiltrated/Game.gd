@@ -13,10 +13,7 @@ func _ready() -> void:
 	EventBus.sala_limpa.connect(_on_sala_limpa)
 
 func _on_jogador_morreu() -> void:
-	hud_label.text = "GAME OVER\nScore: %d\nClique para reiniciar" % GameState.score
-	await get_tree().create_timer(2.0).timeout
-	GameState.resetar()
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("change_scene_to_file", "res://youLost.tscn")
 
 func _on_inimigo_morreu() -> void:
 	_atualizar_hud()
