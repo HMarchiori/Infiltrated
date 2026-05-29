@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bhy1ndukyyveo"]
+
+[ext_resource type="Script" uid="uid://6720ht4s1uoq" path="res://you_won.gd" id="1_j5gld"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o6ky"]
+bg_color = Color(0.2110583, 0.2110583, 0.2110583, 1)
+
+[node name="YouWON" type="Node2D" unique_id=1009401848]
+position = Vector2(0, -23.999998)
+scale = Vector2(2.6000717, 2.8057053)
+script = ExtResource("1_j5gld")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1458756825]
+z_index = 100
+offset_left = 8.461182
+offset_top = 13.543831
+offset_right = 763.7547
+offset_bottom = 395.54382
+scale = Vector2(0.9962211, 1.0471103)
+color = Color(0.011764706, 0.3647059, 0.003921569, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="." unique_id=162336726]
+z_index = 1003
+offset_left = 245.38432
+offset_top = 263.0
+offset_right = 697.4488
+offset_bottom = 361.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_7o6ky")
+toggle_mode = true
+action_mode = 0
+text = "Jogar Novamente"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=705521655]
+z_index = 1000
+offset_left = 126.53497
+offset_top = 143.99231
+offset_right = 688.535
+offset_bottom = 269.9923
+theme_override_font_sizes/font_size = 92
+text = "Você Venceu"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

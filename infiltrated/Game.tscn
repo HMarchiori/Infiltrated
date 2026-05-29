@@ -1,15 +1,17 @@
-[gd_scene format=3 uid="uid://bmucmpvrb7wiv"]
+[gd_scene format=3 uid="uid://0fdtj6k827oj"]
 
 [ext_resource type="Script" uid="uid://cyocoimkt2wgy" path="res://Game.gd" id="1_gamescript"]
-[ext_resource type="PackedScene" uid="uid://djy0t2gsp56b1" path="res://Room.tscn" id="2_roomscene"]
+[ext_resource type="PackedScene" uid="uid://b5kme2ubdm57p" path="res://Room.tscn" id="2_roomscene"]
 [ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
 
 [node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
 
 [node name="Room" parent="." unique_id=520296313 instance=ExtResource("2_roomscene")]
+position = Vector2(55, -201)
 
 [node name="Player" parent="." unique_id=2029011315 instance=ExtResource("3_playerscene")]
+position = Vector2(24, -9)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=90370623]
 
