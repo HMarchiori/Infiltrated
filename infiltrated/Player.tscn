@@ -32,6 +32,5 @@ shape = SubResource("RectangleShape2D_xhfnw")
 zoom = Vector2(1.5, 1.5)
 
 [node name="StatsComponent" type="Node" parent="." unique_id=87154125]
-metadata/HP = 20
 
 [node name="Weapon" type="Node" parent="." unique_id=975686145]
