@@ -18,11 +18,8 @@ func _ready() -> void:
 	_on_jogador_hp_alterado(player.hp)
 
 func _on_jogador_morreu() -> void:
-	var score_final := GameState.score
 	GameState.resetar()
-	hud_label.text = "GAME OVER\nScore: %d\nClique para reiniciar" % score_final
-	await get_tree().create_timer(game_over_delay).timeout
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://youLost.tscn")
 
 func _on_inimigo_morreu() -> void:
 	_atualizar_hud()

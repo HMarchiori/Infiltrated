@@ -1,9 +1,10 @@
-[gd_scene format=4 uid="uid://b5kme2ubdm57p"]
+[gd_scene format=4 uid="uid://djy0t2gsp56b1"]
 
 [ext_resource type="Texture2D" uid="uid://dy576saxgwvph" path="res://Assets/tileset_3x3.png" id="1_61bxy"]
 [ext_resource type="Texture2D" uid="uid://c2q6feuyxd616" path="res://Assets/tileset_4x4.png" id="2_1loai"]
 [ext_resource type="Texture2D" uid="uid://concm2tll8x7q" path="res://Assets/tileset_floors_walls.png" id="3_hgg63"]
 [ext_resource type="Texture2D" uid="uid://b70vefsk0vpgm" path="res://Assets/tileset_props.png" id="4_vbd26"]
+[ext_resource type="AudioStream" uid="uid://d2wly4iwgy7ol" path="res://Assets/ivan_luzan-epic-hybrid-logo-157092.mp3" id="9_4v3hs"]
 [ext_resource type="PackedScene" uid="uid://cltibw3ejn6ba" path="res://Enemy.tscn" id="Enemy_scene"]
 [ext_resource type="PackedScene" uid="uid://d1y516ahtqlo5" path="res://ExitPortal.tscn" id="Portal_scene"]
 [ext_resource type="Script" uid="uid://p5hm3rnb406f" path="res://Room.gd" id="Room_script"]
@@ -1199,3 +1200,9 @@ position = Vector2(-14, 353)
 
 [node name="ExitPortalSpawnPoint" type="Marker2D" parent="." unique_id=917051988]
 position = Vector2(16, -198)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=65780727]
+stream = ExtResource("9_4v3hs")
+volume_db = 4.96
+pitch_scale = 0.4
+autoplay = true
