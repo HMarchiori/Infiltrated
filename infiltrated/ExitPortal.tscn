@@ -6,13 +6,11 @@
 radius = 30.0
 
 [node name="ExitPortal" type="Area2D" unique_id=506935242]
-scale = Vector2(0.35, 0.35)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_portalscript")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1044069211]
-texture = ExtResource("2_hv05d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1663749113]
 shape = SubResource("CircleShape2D_portal")

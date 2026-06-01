@@ -1,6 +1,8 @@
 extends Area2D
 
 func _ready() -> void:
+	print("exit portal")
+	queue_redraw()
 	collision_layer = 32
 	collision_mask = 2
 	body_entered.connect(_on_body_entered)

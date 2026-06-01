@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://cltibw3ejn6ba"]
 
-[ext_resource type="Script" path="res://Enemy.gd" id="1_enscript"]
-[ext_resource type="PackedScene" path="res://Projectile.tscn" id="2_projscene"]
-[ext_resource type="Texture2D" path="res://Assets/03_chorus_cultist.png" id="3_entex"]
+[ext_resource type="Script" uid="uid://by4ot1edxp8fm" path="res://Enemy.gd" id="1_enscript"]
+[ext_resource type="PackedScene" uid="uid://dj62gaj2wrmfc" path="res://Projectile.tscn" id="2_projscene"]
+[ext_resource type="Texture2D" uid="uid://621e76swfp7" path="res://Assets/03_chorus_cultist.png" id="3_entex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enemy"]
-size = Vector2(20, 20)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1407316942]
 collision_layer = 4
@@ -13,8 +12,8 @@ script = ExtResource("1_enscript")
 bullet_scene = ExtResource("2_projscene")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771241619]
-texture = ExtResource("3_entex")
 scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_entex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1209608117]
 shape = SubResource("RectangleShape2D_enemy")
