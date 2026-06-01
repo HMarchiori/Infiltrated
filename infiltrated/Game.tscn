@@ -4,13 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b5kme2ubdm57p" path="res://Room.tscn" id="2_roomscene"]
 [ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_u44n3"]
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_lives"]
-font_size = 48
-font_color = Color(1, 0.2, 0.2, 1)
-
 [node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
 
@@ -26,13 +19,20 @@ position = Vector2(24, -9)
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 600.0
-offset_bottom = 60.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1.0)
+theme_override_colors/font_outline_color = Color(0.03, 0.0, 0.0, 1.0)
+theme_override_constants/outline_size = 6
 text = "Score: 0"
-label_settings = SubResource("LabelSettings_u44n3")
 
 [node name="LivesLabel" type="Label" parent="HUD" unique_id=1538594648]
 offset_left = 10.0
-offset_top = 60.0
-offset_right = 300.0
-offset_bottom = 110.0
-label_settings = SubResource("LabelSettings_lives")
+offset_top = 65.0
+offset_right = 400.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.92, 0.12, 0.08, 1.0)
+theme_override_colors/font_outline_color = Color(0.03, 0.0, 0.0, 1.0)
+theme_override_constants/outline_size = 6
+text = "❤ ❤ ❤"

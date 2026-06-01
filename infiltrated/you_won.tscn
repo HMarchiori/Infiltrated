@@ -4,37 +4,42 @@
 [ext_resource type="Texture2D" uid="uid://di1s1gk5yxf5x" path="res://Assets/bllod.png" id="2_blood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.0, 0.07, 0.0, 0.9)
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0.07, 0, 0.9)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.2, 0.85, 0.15, 1.0)
+border_color = Color(0.2, 0.85, 0.15, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
-corner_radius_bottom_left = 8
 corner_radius_bottom_right = 8
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_top = 10.0
-content_margin_bottom = 10.0
+corner_radius_bottom_left = 8
 
-[node name="YouWon" type="Node2D"]
+[node name="YouWon" type="Node2D" unique_id=1402230260]
 script = ExtResource("1_j5gld")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1330262965]
 
-[node name="Root" type="Control" parent="CanvasLayer"]
+[node name="Root" type="Control" parent="CanvasLayer" unique_id=1557555458]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Background" type="TextureRect" parent="CanvasLayer/Root"]
+[node name="Background" type="TextureRect" parent="CanvasLayer/Root" unique_id=180194708]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("2_blood")
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="CanvasLayer/Root"]
+[node name="Label" type="Label" parent="CanvasLayer/Root" unique_id=642013698]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.35
 anchor_right = 0.5
@@ -43,19 +48,21 @@ offset_left = -500.0
 offset_top = -70.0
 offset_right = 500.0
 offset_bottom = 70.0
-theme_override_font_sizes/font_size = 108
-theme_override_colors/font_color = Color(1.0, 0.96, 0.7, 1.0)
-theme_override_colors/font_outline_color = Color(0.05, 0.04, 0.0, 1.0)
-theme_override_constants/outline_size = 10
+theme_override_colors/font_color = Color(1, 0.96, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.04, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 140
 text = "Você Venceu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Root"]
+[node name="Button" type="Button" parent="CanvasLayer/Root" unique_id=1707694351]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.62
+anchor_top = 0.56
 anchor_right = 0.5
-anchor_bottom = 0.62
+anchor_bottom = 0.56
 offset_left = -220.0
 offset_top = -38.0
 offset_right = 220.0

@@ -28,7 +28,7 @@ func _on_sala_limpa() -> void:
 	hud_label.text = "Sala limpa! Entre no portal.\nScore: %d" % GameState.score
 
 func _on_jogador_hp_alterado(hp_atual: int) -> void:
-	hud_lives.text = "❤ x %d" % hp_atual
+	hud_lives.text = "❤ ".repeat(max(0, hp_atual)).strip_edges()
 
 func _atualizar_hud() -> void:
 	hud_label.text = "Score: %d" % GameState.score
