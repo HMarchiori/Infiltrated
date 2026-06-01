@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by4ot1edxp8fm" path="res://Enemy.gd" id="1_enscript"]
 [ext_resource type="PackedScene" uid="uid://dj62gaj2wrmfc" path="res://Projectile.tscn" id="2_projscene"]
-[ext_resource type="Texture2D" uid="uid://621e76swfp7" path="res://Assets/03_chorus_cultist.png" id="3_entex"]
+[ext_resource type="Texture2D" uid="uid://cgcxn0en4v26w" path="res://05_inquisitor.png" id="3_2hac7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enemy"]
 size = Vector2(40, 40)
@@ -15,7 +15,7 @@ bullet_scene = ExtResource("2_projscene")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771241619]
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_entex")
+texture = ExtResource("3_2hac7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1209608117]
 shape = SubResource("RectangleShape2D_enemy")

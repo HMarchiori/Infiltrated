@@ -1182,6 +1182,7 @@ sources/5 = SubResource("TileSetAtlasSource_yc6jp")
 sources/6 = SubResource("TileSetAtlasSource_1kin1")
 
 [node name="Room" type="Node2D" unique_id=1136582222]
+position = Vector2(805, 538)
 script = ExtResource("Room_script")
 portal_scene = ExtResource("Portal_scene")
 

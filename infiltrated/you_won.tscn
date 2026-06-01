@@ -1,49 +1,67 @@
 [gd_scene format=3 uid="uid://cybhxtsjtw44p"]
 
 [ext_resource type="Script" uid="uid://6720ht4s1uoq" path="res://you_won.gd" id="1_j5gld"]
+[ext_resource type="Texture2D" uid="uid://di1s1gk5yxf5x" path="res://Assets/bllod.png" id="2_blood"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o6ky"]
-bg_color = Color(0.2110583, 0.2110583, 0.2110583, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.0, 0.07, 0.0, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.85, 0.15, 1.0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
 
-[node name="YouWON" type="Node2D" unique_id=1009401848]
-position = Vector2(0, -23.999998)
-scale = Vector2(2.6000717, 2.8057053)
+[node name="YouWon" type="Node2D"]
 script = ExtResource("1_j5gld")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1458756825]
-z_index = 100
-offset_top = 9.979662
-offset_right = 755.2935
-offset_bottom = 391.97968
-scale = Vector2(0.9962211, 1.0471103)
-color = Color(0.011764706, 0.3647059, 0.003921569, 1)
-metadata/_edit_use_anchors_ = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="." unique_id=162336726]
-z_index = 1003
-offset_left = 245.38432
-offset_top = 263.0
-offset_right = 697.4488
-offset_bottom = 361.0
-scale = Vector2(0.5, 0.5)
-theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_7o6ky")
-toggle_mode = true
-action_mode = 0
-text = "Jogar Novamente"
-metadata/_edit_use_anchors_ = true
+[node name="Root" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="." unique_id=705521655]
-z_index = 1000
-offset_left = 66.53663
-offset_top = 126.88431
-offset_right = 700.5366
-offset_bottom = 252.88431
-theme_override_font_sizes/font_size = 92
+[node name="Background" type="TextureRect" parent="CanvasLayer/Root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_blood")
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="CanvasLayer/Root"]
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+offset_left = -500.0
+offset_top = -70.0
+offset_right = 500.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 108
+theme_override_colors/font_color = Color(1.0, 0.96, 0.7, 1.0)
+theme_override_colors/font_outline_color = Color(0.05, 0.04, 0.0, 1.0)
+theme_override_constants/outline_size = 10
 text = "Você Venceu"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_trim_flags = 128
-metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Button" type="Button" parent="CanvasLayer/Root"]
+anchor_left = 0.5
+anchor_top = 0.62
+anchor_right = 0.5
+anchor_bottom = 0.62
+offset_left = -220.0
+offset_top = -38.0
+offset_right = 220.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Jogar Novamente"
+
+[connection signal="pressed" from="CanvasLayer/Root/Button" to="." method="_on_button_pressed"]
