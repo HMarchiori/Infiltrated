@@ -17,6 +17,7 @@ func _ready() -> void:
 	add_to_group("enemies")
 	_fire_timer = randf_range(0.5, fire_rate)
 
+// test
 func _physics_process(delta: float) -> void:
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
