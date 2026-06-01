@@ -6,6 +6,7 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 @onready var hud_label: Label = $HUD/ScoreLabel
 @onready var hud_lives: Label = $HUD/LivesLabel
+@onready var room_clear_banner: Label = $HUD/RoomClearBanner
 
 func _ready() -> void:
 	var spawn := room.get_node("SpawnPoint") as Marker2D
@@ -25,7 +26,9 @@ func _on_inimigo_morreu() -> void:
 	_atualizar_hud()
 
 func _on_sala_limpa() -> void:
-	hud_label.text = "Sala limpa! Entre no portal.\nScore: %d" % GameState.score
+	_atualizar_hud()
+	var tween := create_tween()
+	tween.tween_property(room_clear_banner, "modulate:a", 1.0, 0.6)
 
 func _on_jogador_hp_alterado(hp_atual: int) -> void:
 	hud_lives.text = "❤ ".repeat(max(0, hp_atual)).strip_edges()
