@@ -12,6 +12,8 @@ size = Vector2(60, 60)
 [node name="Player" type="CharacterBody2D" unique_id=1975386178]
 collision_layer = 2
 script = ExtResource("1_plscript")
+fire_rate = 0.2
+hp = 5
 bullet_scene = ExtResource("2_projscene")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1682240116]

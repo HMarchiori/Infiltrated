@@ -1,33 +1,46 @@
 extends Node
 
 @export var enemy_scene: PackedScene
-@export var enemy_count: int = 6
+@export var enemy_count: int = 20
+@export var min_dist_from_player: float = 180.0
 
 var _vivos: int = 0
-
-const POSICOES: Array = [
-	Vector2(-220, -180),
-	Vector2(220, -180),
-	Vector2(-250,   50),
-	Vector2(250,   50),
-	Vector2(  50, -200),
-	Vector2(-200,  220),
-	Vector2(200,  220),
-	Vector2(  50,  280),
-]
 
 func _ready() -> void:
 	EventBus.inimigo_morreu.connect(_on_inimigo_morreu)
 
 func spawnar(quantidade: int) -> void:
 	_vivos = quantidade
+	var posicoes := _get_spawn_positions(quantidade)
 	for i in quantidade:
 		if enemy_scene == null:
 			push_error("EnemySpawner: enemy_scene não configurada")
 			return
 		var inimigo: Node2D = enemy_scene.instantiate()
-		inimigo.global_position = get_parent().global_position + POSICOES[i % POSICOES.size()]
+		inimigo.global_position = posicoes[i]
 		get_parent().add_child(inimigo)
+
+func _get_spawn_positions(count: int) -> Array[Vector2]:
+	var tilemap := get_parent().get_node("TileMapLayer") as TileMapLayer
+	var spawn_marker := get_parent().get_node("SpawnPoint") as Marker2D
+	var player_pos := spawn_marker.global_position if spawn_marker else Vector2.ZERO
+
+	var cells := tilemap.get_used_cells()
+	cells.shuffle()
+
+	var result: Array[Vector2] = []
+	for cell in cells:
+		var world_pos := tilemap.to_global(tilemap.map_to_local(cell))
+		if world_pos.distance_to(player_pos) >= min_dist_from_player:
+			result.append(world_pos)
+			if result.size() >= count:
+				break
+
+	# Fallback caso o mapa não tenha células suficientes
+	while result.size() < count:
+		result.append(get_parent().global_position)
+
+	return result
 
 func _on_inimigo_morreu() -> void:
 	_vivos -= 1

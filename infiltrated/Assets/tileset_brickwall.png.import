@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crjix88hmn1rk"
-path="res://.godot/imported/sala_02_biblioteca.jpg-0daf302bd6558f5a61247f6393a75132.ctex"
+uid="uid://u3ipbsckfohp"
+path="res://.godot/imported/tileset_brickwall.png-c8433cfea0c3b9417c5067d9e8646012.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sala_02_biblioteca.jpg"
-dest_files=["res://.godot/imported/sala_02_biblioteca.jpg-0daf302bd6558f5a61247f6393a75132.ctex"]
+source_file="res://Assets/tileset_brickwall.png"
+dest_files=["res://.godot/imported/tileset_brickwall.png-c8433cfea0c3b9417c5067d9e8646012.ctex"]
 
 [params]
 

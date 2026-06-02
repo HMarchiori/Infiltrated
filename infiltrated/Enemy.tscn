@@ -10,7 +10,9 @@ size = Vector2(40, 40)
 [node name="Enemy" type="CharacterBody2D" unique_id=1407316942]
 collision_layer = 4
 script = ExtResource("1_enscript")
-speed = 100.0
+speed = 150.0
+attack_range = 330.0
+hp = 2
 bullet_scene = ExtResource("2_projscene")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771241619]
