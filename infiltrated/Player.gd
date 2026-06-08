@@ -12,6 +12,8 @@ var _blink_timer: float = 0.1
 var _fire_timer: float = 0.0
 var _last_dir: Vector2 = Vector2.DOWN
 
+@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 func _ready() -> void:
 	add_to_group("player")
 	EventBus.jogador_hp_alterado.emit(hp)
@@ -26,6 +28,9 @@ func _physics_process(delta: float) -> void:
 
 	if dir != Vector2.ZERO:
 		_last_dir = dir.normalized()
+		_sprite.play(_dir_to_anim(_last_dir))
+	else:
+		_sprite.stop()
 
 	_fire_timer -= delta
 
@@ -42,6 +47,28 @@ func _physics_process(delta: float) -> void:
 		if _invincibility_timer <= 0.0:
 			_invincible = false
 			modulate.a = 1.0
+
+func _dir_to_anim(dir: Vector2) -> StringName:
+	var angle := rad_to_deg(dir.angle())
+	if angle < 0:
+		angle += 360.0
+	# angle 0=E, 45=SE, 90=S, 135=SW, 180=W, 225=NW, 270=N, 315=NE
+	if angle < 22.5 or angle >= 337.5:
+		return &"walk_e"
+	elif angle < 67.5:
+		return &"walk_se"
+	elif angle < 112.5:
+		return &"walk_s"
+	elif angle < 157.5:
+		return &"walk_sw"
+	elif angle < 202.5:
+		return &"walk_w"
+	elif angle < 247.5:
+		return &"walk_nw"
+	elif angle < 292.5:
+		return &"walk_n"
+	else:
+		return &"walk_ne"
 
 func _shoot() -> void:
 	if bullet_scene == null:
