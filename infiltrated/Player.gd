@@ -28,7 +28,8 @@ func _physics_process(delta: float) -> void:
 		_last_dir = dir.normalized()
 
 	_fire_timer -= delta
-	if Input.is_action_just_pressed("ui_accept") and _fire_timer <= 0.0:
+
+	if Input.is_action_pressed("ui_accept") and _fire_timer <= 0.0:
 		_shoot()
 		_fire_timer = fire_rate
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cyocoimkt2wgy" path="res://Game.gd" id="1_gamescript"]
 [ext_resource type="PackedScene" uid="uid://djy0t2gsp56b1" path="res://Room.tscn" id="2_roomscene"]
 [ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
-[ext_resource type="Shader" path="res://psycho_overlay.gdshader" id="4_psychoshader"]
+[ext_resource type="Shader" uid="uid://36t8ladevmrv" path="res://psycho_overlay.gdshader" id="4_psychoshader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psycho"]
 shader = ExtResource("4_psychoshader")
@@ -12,21 +12,19 @@ shader = ExtResource("4_psychoshader")
 script = ExtResource("1_gamescript")
 
 [node name="Room" parent="." unique_id=520296313 instance=ExtResource("2_roomscene")]
-position = Vector2(0, 0)
 
 [node name="Player" parent="." unique_id=2029011315 instance=ExtResource("3_playerscene")]
 position = Vector2(24, -9)
-hp = 5
 
-[node name="PostFX" type="CanvasLayer" parent="."]
+[node name="PostFX" type="CanvasLayer" parent="." unique_id=484539247]
 layer = 10
 
-[node name="Overlay" type="ColorRect" parent="PostFX"]
+[node name="Overlay" type="ColorRect" parent="PostFX" unique_id=737101852]
+material = SubResource("ShaderMaterial_psycho")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-material = SubResource("ShaderMaterial_psycho")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=90370623]
 layer = 128
@@ -53,7 +51,9 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 48
 text = "❤ ❤ ❤"
 
-[node name="RoomClearBanner" type="Label" parent="HUD"]
+[node name="RoomClearBanner" type="Label" parent="HUD" unique_id=1575295984]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -62,12 +62,11 @@ offset_left = -500.0
 offset_top = -60.0
 offset_right = 500.0
 offset_bottom = 60.0
-modulate = Color(1, 1, 1, 0)
-theme_override_font_sizes/font_size = 58
-theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1.0)
-theme_override_colors/font_outline_color = Color(0.03, 0.0, 0.0, 1.0)
+theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
 theme_override_constants/outline_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 58
 text = "Sala Purificada!
 Dirija-se ao Portal"
+horizontal_alignment = 1
+vertical_alignment = 1

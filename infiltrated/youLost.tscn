@@ -4,37 +4,51 @@
 [ext_resource type="Texture2D" uid="uid://di1s1gk5yxf5x" path="res://Assets/bllod.png" id="2_blood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.07, 0.0, 0.0, 0.9)
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.07, 0, 0, 0.9)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.85, 0.1, 0.05, 1.0)
+border_color = Color(0.85, 0.1, 0.05, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
-corner_radius_bottom_left = 8
 corner_radius_bottom_right = 8
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_top = 10.0
-content_margin_bottom = 10.0
+corner_radius_bottom_left = 8
 
-[node name="YouLost" type="Node2D"]
+[node name="YouLost" type="Node2D" unique_id=1429015331]
 script = ExtResource("1_b45bt")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=353744902]
 
-[node name="Root" type="Control" parent="CanvasLayer"]
+[node name="Root" type="Control" parent="CanvasLayer" unique_id=186486735]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Background" type="TextureRect" parent="CanvasLayer/Root"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Root" unique_id=1371141906]
+z_index = 1010
+layout_mode = 0
+offset_left = 738.0
+offset_top = 517.0
+offset_right = 1216.0
+offset_bottom = 631.0
+theme_override_font_sizes/font_size = 80
+text = "SCORE"
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/Root" unique_id=1898717297]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("2_blood")
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="CanvasLayer/Root"]
+[node name="Label" type="Label" parent="CanvasLayer/Root" unique_id=567193266]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.35
 anchor_right = 0.5
@@ -43,23 +57,25 @@ offset_left = -500.0
 offset_top = -70.0
 offset_right = 500.0
 offset_bottom = 70.0
-theme_override_font_sizes/font_size = 140
-theme_override_colors/font_color = Color(1.0, 0.88, 0.88, 1.0)
-theme_override_colors/font_outline_color = Color(0.05, 0.0, 0.0, 1.0)
+theme_override_colors/font_color = Color(1, 0.88, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0, 0, 1)
 theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 140
 text = "Você Perdeu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Root"]
+[node name="Button" type="Button" parent="CanvasLayer/Root" unique_id=1112890025]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.56
 anchor_right = 0.5
 anchor_bottom = 0.56
-offset_left = -220.0
-offset_top = -38.0
-offset_right = 220.0
-offset_bottom = 38.0
+offset_left = -248.0
+offset_top = 83.20001
+offset_right = 192.0
+offset_bottom = 159.20001
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 text = "Tente Novamente"

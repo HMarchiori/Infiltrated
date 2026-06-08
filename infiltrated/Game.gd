@@ -19,8 +19,7 @@ func _ready() -> void:
 	_on_jogador_hp_alterado(player.hp)
 
 func _on_jogador_morreu() -> void:
-	GameState.resetar()
-	get_tree().change_scene_to_file("res://youLost.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://youLost.tscn")
 
 func _on_inimigo_morreu() -> void:
 	_atualizar_hud()

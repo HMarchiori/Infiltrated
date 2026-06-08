@@ -14,10 +14,10 @@ func _ready() -> void:
 	music.play()
 	if from_player:
 		collision_layer = 8
-		collision_mask = 4
+		collision_mask = 4 | 1
 	else:
 		collision_layer = 16
-		collision_mask = 2
+		collision_mask = 2 | 1
 	body_entered.connect(_on_body_entered)
 
 func _process(delta: float) -> void:
@@ -33,3 +33,5 @@ func _on_body_entered(body: Node2D) -> void:
 	elif not from_player and body.is_in_group("player"):
 		body.receber_dano(dano)
 		queue_free()
+	elif body is StaticBody2D:
+		queue_free()  

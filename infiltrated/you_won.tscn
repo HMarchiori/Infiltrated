@@ -29,12 +29,26 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Root" unique_id=341281776]
+z_index = 1010
+layout_mode = 0
+offset_left = 738.0
+offset_top = 517.0
+offset_right = 1216.0
+offset_bottom = 631.0
+theme_override_font_sizes/font_size = 80
+text = "SCORE"
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/Root" unique_id=180194708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_blood")
 stretch_mode = 6
 
@@ -63,10 +77,10 @@ anchor_left = 0.5
 anchor_top = 0.56
 anchor_right = 0.5
 anchor_bottom = 0.56
-offset_left = -220.0
-offset_top = -38.0
-offset_right = 220.0
-offset_bottom = 38.0
+offset_left = -217.0
+offset_top = 106.20001
+offset_right = 223.0
+offset_bottom = 182.20001
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 text = "Jogar Novamente"

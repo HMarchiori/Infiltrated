@@ -1,8 +1,10 @@
 extends Node
 
-@export var enemy_scene: PackedScene
 @export var enemy_count: int = 20
 @export var min_dist_from_player: float = 180.0
+
+@export var ranged_enemy_scene: PackedScene
+@export var melee_enemy_scene: PackedScene
 
 var _vivos: int = 0
 
@@ -12,14 +14,23 @@ func _ready() -> void:
 func spawnar(quantidade: int) -> void:
 	_vivos = quantidade
 	var posicoes := _get_spawn_positions(quantidade)
+
 	for i in quantidade:
-		if enemy_scene == null:
-			push_error("EnemySpawner: enemy_scene não configurada")
+		var cena: PackedScene
+
+		if randf() < 0.7:
+			cena = ranged_enemy_scene
+		else:
+			cena = melee_enemy_scene
+
+		if cena == null:
+			push_error("EnemySpawner: cena de inimigo não configurada")
 			return
-		var inimigo: Node2D = enemy_scene.instantiate()
+
+		var inimigo: Node2D = cena.instantiate()
 		inimigo.global_position = posicoes[i]
 		get_parent().add_child(inimigo)
-
+		
 func _get_spawn_positions(count: int) -> Array[Vector2]:
 	var tilemap := get_parent().get_node("TileMapLayer") as TileMapLayer
 	var spawn_marker := get_parent().get_node("SpawnPoint") as Marker2D
