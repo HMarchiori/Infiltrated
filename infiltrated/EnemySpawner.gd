@@ -1,12 +1,13 @@
 extends Node
 
-@export var enemy_count: int = 20
-@export var powerUP_count: int = 10
+@export var enemy_count: int = 30
+@export var powerUP_count: int = 15
 @export var min_dist_from_player: float = 180.0
 
 @export var ranged_enemy_scene: PackedScene
 @export var melee_enemy_scene: PackedScene
-@export var power_up : PackedScene
+@export var power_up_scene: PackedScene
+@export var health_power_up_scene: PackedScene
 
 var vivos: int = 0
 
@@ -20,8 +21,10 @@ func spawnar(quantidade: int) -> void:
 	
 	for i in powerUP_count:
 		var cena: PackedScene
-
-		cena = power_up
+		if randf() < 0.3 :
+			cena = health_power_up_scene
+		else:
+			cena = power_up_scene
 
 		if cena == null:
 			push_error("PowerUP: cena de power_up não configurada")

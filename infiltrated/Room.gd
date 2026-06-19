@@ -43,7 +43,7 @@ func _criar_fronteiras() -> void:
 	for cell in cells:
 		usadas[cell] = true
 
-	var tile_size := Vector2(tilemap.tile_set.tile_size)
+	var tile_size := Vector2(tilemap.tile_set.tile_size) * tilemap.scale
 	var half      := tile_size / 2.0
 
 	# Um único StaticBody2D para todos os colisores internos
@@ -56,7 +56,7 @@ func _criar_fronteiras() -> void:
 	for x in range(min_x, max_x + 1):
 		for y in range(min_y, max_y + 1):
 			if not usadas.has(Vector2i(x, y)):
-				var local_pos := tilemap.position + Vector2(tilemap.map_to_local(Vector2i(x, y)))
+				var local_pos := to_local(tilemap.to_global(tilemap.map_to_local(Vector2i(x, y))))
 				var shape     := CollisionShape2D.new()
 				var rect      := RectangleShape2D.new()
 				rect.size      = tile_size
@@ -65,15 +65,15 @@ func _criar_fronteiras() -> void:
 				body.add_child(shape)
 
 	# 4 paredes externas ao redor do bounding box
-	var tl   := tilemap.position + Vector2(tilemap.map_to_local(Vector2i(min_x, min_y))) - half
-	var br   := tilemap.position + Vector2(tilemap.map_to_local(Vector2i(max_x, max_y))) + half
+	var tl   := to_local(tilemap.to_global(tilemap.map_to_local(Vector2i(min_x, min_y)))) - half
+	var br   := to_local(tilemap.to_global(tilemap.map_to_local(Vector2i(max_x, max_y)))) + half
 	var esq  := tl.x
 	var dir  := br.x
 	var cima := tl.y
 	var baixo := br.y
 	var larg := dir - esq
 	var alt  := baixo - cima
-	var t    := 64.0
+	var t    := tile_size.x
 	var cx   := (esq + dir) / 2.0
 	var cy   := (cima + baixo) / 2.0
 

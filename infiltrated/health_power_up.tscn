@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://healthpw1"]
+
+[ext_resource type="Script" uid="uid://cgsj1novfv54w" path="res://power_up.gd" id="1_lbdsv"]
+[ext_resource type="Texture2D" uid="uid://ci6jsf67mpikd" path="res://coração.png" id="2_4lekf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkoic"]
+size = Vector2(34, 33)
+
+[node name="PowerUP" type="Area2D" unique_id=700638799]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_lbdsv")
+power_up_type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=422774111]
+position = Vector2(1.0000014, -1.4305115e-06)
+scale = Vector2(0.097777784, 0.097777784)
+texture = ExtResource("2_4lekf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=866484828]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_mkoic")

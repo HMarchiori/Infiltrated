@@ -3,7 +3,7 @@ extends CharacterBody2D
 enum State { IDLE, CHASE, ATTACK }
 
 @export var speed: float = 150.0
-@export var detection_range: float = 300.0
+@export var detection_range: float = 400.0
 @export var attack_range: float = 50.0
 @export var attack_rate: float = 1.0
 @export var damage: int = 1

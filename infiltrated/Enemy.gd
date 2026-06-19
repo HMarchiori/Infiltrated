@@ -3,23 +3,20 @@ extends CharacterBody2D
 enum State { IDLE, CHASE, ATTACK }
 
 @export var speed: float = 80.0
-@export var detection_range: float = 350.0
+@export var detection_range: float = 400.0
 @export var attack_range: float = 220.0
 @export var fire_rate: float = 2.0
-@export var hp: int = 3
+@export var hp: int = 2
 @export var bullet_scene: PackedScene
-@export var invincibility_duration: float = 0.25
 
 var state: State = State.IDLE
 var player: Node2D = null
 var _fire_timer: float = 0.0
 var _invincible: bool = false
-var _invincibility_timer: float = 0.0
-var _blink_timer: float = 0.1
 
 func _ready() -> void:
 	add_to_group("enemies")
-	_fire_timer = randf_range(0.5, fire_rate)
+	_fire_timer = randf_range(0.6, fire_rate)
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -55,15 +52,7 @@ func _physics_process(delta: float) -> void:
 			if dist > attack_range * 1.2:
 				state = State.CHASE
 
-	if _invincible:
-		_invincibility_timer -= delta
-		_blink_timer -= delta
-		if _blink_timer <= 0.0:
-			_blink_timer = 0.1
-			modulate.a = 0.3 if modulate.a > 0.5 else 1.0
-		if _invincibility_timer <= 0.0:
-			_invincible = false
-			modulate.a = 1.0
+	
 
 func _atirar() -> void:
 	if bullet_scene == null or player == null:
@@ -83,5 +72,3 @@ func receber_dano(dano: int) -> void:
 		EventBus.inimigo_morreu.emit()
 		queue_free()
 		return
-	_invincible = true
-	_invincibility_timer = invincibility_duration
