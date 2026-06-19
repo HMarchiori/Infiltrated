@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dy576saxgwvph" path="res://Assets/tileset_3x3.png" id="1_61bxy"]
 [ext_resource type="PackedScene" uid="uid://c2447ho10j566" path="res://Enemy2.tscn" id="5_4v3hs"]
+[ext_resource type="PackedScene" uid="uid://cronne3df35vo" path="res://power_up.tscn" id="6_yc6jp"]
 [ext_resource type="Texture2D" uid="uid://u3ipbsckfohp" path="res://Assets/tileset_brickwall.png" id="7_vbd26"]
 [ext_resource type="Texture2D" uid="uid://dv5e1ur1usl0d" path="res://Assets/tileset_brickwall_relief.png" id="8_axjh2"]
 [ext_resource type="AudioStream" uid="uid://d2wly4iwgy7ol" path="res://Assets/ivan_luzan-epic-hybrid-logo-157092.mp3" id="9_4v3hs"]
@@ -3552,6 +3553,7 @@ portal_scene = ExtResource("Portal_scene")
 script = ExtResource("Spawner_script")
 ranged_enemy_scene = ExtResource("Enemy_scene")
 melee_enemy_scene = ExtResource("5_4v3hs")
+power_up = ExtResource("6_yc6jp")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1611997877]
 position = Vector2(3, 4)

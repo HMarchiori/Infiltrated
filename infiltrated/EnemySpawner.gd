@@ -1,19 +1,36 @@
 extends Node
 
 @export var enemy_count: int = 20
+@export var powerUP_count: int = 10
 @export var min_dist_from_player: float = 180.0
 
 @export var ranged_enemy_scene: PackedScene
 @export var melee_enemy_scene: PackedScene
+@export var power_up : PackedScene
 
-var _vivos: int = 0
+var vivos: int = 0
 
 func _ready() -> void:
 	EventBus.inimigo_morreu.connect(_on_inimigo_morreu)
 
 func spawnar(quantidade: int) -> void:
-	_vivos = quantidade
-	var posicoes := _get_spawn_positions(quantidade)
+	vivos = powerUP_count + enemy_count 
+	
+	var posicoes := _get_spawn_positions(vivos)
+	
+	for i in powerUP_count:
+		var cena: PackedScene
+
+		cena = power_up
+
+		if cena == null:
+			push_error("PowerUP: cena de power_up não configurada")
+			return
+
+		var power_ups: Node2D = cena.instantiate()
+		power_ups.global_position = posicoes[enemy_count + i - 1]
+		get_parent().add_child(power_ups)
+	
 
 	for i in quantidade:
 		var cena: PackedScene
@@ -30,6 +47,7 @@ func spawnar(quantidade: int) -> void:
 		var inimigo: Node2D = cena.instantiate()
 		inimigo.global_position = posicoes[i]
 		get_parent().add_child(inimigo)
+		
 		
 func _get_spawn_positions(count: int) -> Array[Vector2]:
 	var tilemap := get_parent().get_node("TileMapLayer") as TileMapLayer
@@ -54,6 +72,6 @@ func _get_spawn_positions(count: int) -> Array[Vector2]:
 	return result
 
 func _on_inimigo_morreu() -> void:
-	_vivos -= 1
-	if _vivos <= 0:
+	vivos -= 1
+	if vivos <= 0:
 		EventBus.sala_limpa.emit()

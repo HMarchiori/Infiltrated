@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 200.0
-@export var fire_rate: float = 0.1
+@export var fire_rate: float = 0.4
 @export var hp: int = 3
 @export var bullet_scene: PackedScene
 @export var invincibility_duration: float = 2
@@ -15,6 +15,8 @@ var _last_dir: Vector2 = Vector2.DOWN
 func _ready() -> void:
 	add_to_group("player")
 	EventBus.jogador_hp_alterado.emit(hp)
+	EventBus.powerUP.connect(powerUPFireRate)
+
 
 func _physics_process(delta: float) -> void:
 	var dir := Vector2(
@@ -63,3 +65,7 @@ func receber_dano(dano: int) -> void:
 		return
 	_invincible = true
 	_invincibility_timer = invincibility_duration
+	
+func powerUPFireRate() -> void:
+	fire_rate = max(0.05, fire_rate - 0.05)
+	print(fire_rate)	
