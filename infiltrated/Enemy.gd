@@ -8,10 +8,14 @@ enum State { IDLE, CHASE, ATTACK }
 @export var fire_rate: float = 2.0
 @export var hp: int = 3
 @export var bullet_scene: PackedScene
+@export var invincibility_duration: float = 0.25
 
 var state: State = State.IDLE
 var player: Node2D = null
 var _fire_timer: float = 0.0
+var _invincible: bool = false
+var _invincibility_timer: float = 0.0
+var _blink_timer: float = 0.1
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -51,6 +55,16 @@ func _physics_process(delta: float) -> void:
 			if dist > attack_range * 1.2:
 				state = State.CHASE
 
+	if _invincible:
+		_invincibility_timer -= delta
+		_blink_timer -= delta
+		if _blink_timer <= 0.0:
+			_blink_timer = 0.1
+			modulate.a = 0.3 if modulate.a > 0.5 else 1.0
+		if _invincibility_timer <= 0.0:
+			_invincible = false
+			modulate.a = 1.0
+
 func _atirar() -> void:
 	if bullet_scene == null or player == null:
 		return
@@ -61,8 +75,13 @@ func _atirar() -> void:
 	get_tree().current_scene.add_child(bullet)
 
 func receber_dano(dano: int) -> void:
+	if _invincible:
+		return
 	hp -= dano
 	if hp <= 0:
 		GameState.adicionar_pontos(100)
 		EventBus.inimigo_morreu.emit()
 		queue_free()
+		return
+	_invincible = true
+	_invincibility_timer = invincibility_duration
