@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 250.0
-@export var fire_rate: float = 0.3
+@export var fire_rate: float = 0.35
 @export var hp: int = 5
 @export var bullet_scene: PackedScene
 @export var invincibility_duration: float = 2
@@ -94,5 +94,5 @@ func receber_dano(dano: int) -> void:
 	_invincibility_timer = invincibility_duration
 	
 func powerUPFireRate() -> void:
-	fire_rate = max(0.06, fire_rate - 0.05)
+	fire_rate = max(0.06, fire_rate - 0.03)
 	print(fire_rate)	

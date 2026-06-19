@@ -21,7 +21,7 @@ func spawnar(quantidade: int) -> void:
 	
 	for i in powerUP_count:
 		var cena: PackedScene
-		if randf() < 0.3 :
+		if randf() < 0.4 :
 			cena = health_power_up_scene
 		else:
 			cena = power_up_scene
