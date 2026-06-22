@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var spawner: Node = $EnemySpawner
 @onready var portal_spawn: Marker2D = $ExitPortalSpawnPoint
-@onready var tilemap: TileMapLayer = $TileMapLayer
+@onready var tilemap: TileMapLayer = $Floor
 
 func _ready() -> void:
 	_criar_fronteiras()

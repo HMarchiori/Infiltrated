@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci6jsf67mpikd"
-path="res://.godot/imported/coração.png-263ca94a54fac408063ca65708a99037.ctex"
+uid="uid://c2ny13ddmms34"
+path="res://.godot/imported/furniture_mansion_32.png-d7fa80e5996f6fee57fa7637c0855935.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://coração.png"
-dest_files=["res://.godot/imported/coração.png-263ca94a54fac408063ca65708a99037.ctex"]
+source_file="res://Assets/furniture_mansion_32.png"
+dest_files=["res://.godot/imported/furniture_mansion_32.png-d7fa80e5996f6fee57fa7637c0855935.ctex"]
 
 [params]
 

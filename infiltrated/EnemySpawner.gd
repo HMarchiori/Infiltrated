@@ -53,7 +53,7 @@ func spawnar(quantidade: int) -> void:
 		
 		
 func _get_spawn_positions(count: int) -> Array[Vector2]:
-	var tilemap := get_parent().get_node("TileMapLayer") as TileMapLayer
+	var tilemap := get_parent().get_node("Floor") as TileMapLayer
 	var spawn_marker := get_parent().get_node("SpawnPoint") as Marker2D
 	var player_pos := spawn_marker.global_position if spawn_marker else Vector2.ZERO
 

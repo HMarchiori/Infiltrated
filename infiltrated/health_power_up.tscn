@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://healthpw1"]
 
-[ext_resource type="Script" uid="uid://cgsj1novfv54w" path="res://power_up.gd" id="1_lbdsv"]
-[ext_resource type="Texture2D" uid="uid://ci6jsf67mpikd" path="res://coração.png" id="2_4lekf"]
+[ext_resource type="Script" path="res://power_up.gd" id="1_lbdsv"]
+[ext_resource type="Texture2D" uid="uid://ci6jsf67mpikd" path="res://Assets/coração.png" id="2_4lekf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkoic"]
 size = Vector2(34, 33)

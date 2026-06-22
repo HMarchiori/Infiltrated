@@ -8,7 +8,6 @@ extends CharacterBody2D
 
 var _invincible: bool = false
 var _invincibility_timer: float = 0.0
-var _blink_timer: float = 0.1
 var _fire_timer: float = 0.0
 var _last_dir: Vector2 = Vector2.DOWN
 
@@ -42,13 +41,8 @@ func _physics_process(delta: float) -> void:
 
 	if _invincible:
 		_invincibility_timer -= delta
-		_blink_timer -= delta
-		if _blink_timer <= 0.0:
-			_blink_timer = 0.1
-			modulate.a = 0.3 if modulate.a > 0.5 else 1.0
 		if _invincibility_timer <= 0.0:
 			_invincible = false
-			modulate.a = 1.0
 
 func _dir_to_anim(dir: Vector2) -> StringName:
 	var angle := rad_to_deg(dir.angle())
@@ -92,6 +86,7 @@ func receber_dano(dano: int) -> void:
 		return
 	_invincible = true
 	_invincibility_timer = invincibility_duration
+	EventBus.jogador_dano.emit()
 	
 func powerUPFireRate() -> void:
 	fire_rate = max(0.06, fire_rate - 0.03)

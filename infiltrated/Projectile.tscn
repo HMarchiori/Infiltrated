@@ -1,23 +1,93 @@
 [gd_scene format=3 uid="uid://dj62gaj2wrmfc"]
 
 [ext_resource type="Script" uid="uid://bvxgrxsl3wmm2" path="res://Projectile.gd" id="1_projscript"]
-[ext_resource type="Texture2D" uid="uid://c8c85gdqsdvuu" path="res://Assets/09_eye_symbol.png" id="2_eyetex"]
 [ext_resource type="AudioStream" uid="uid://bxaw15kuj5t5e" path="res://Assets/eaglaxle-gun-shot-1-530788.mp3" id="3_1cf02"]
+[ext_resource type="Texture2D" uid="uid://d4jqkwqu2cqn2" path="res://Assets/illuminati_bullet_spritesheet.png" id="3_3rnyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6v2"]
 size = Vector2(6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8apua"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t7m1"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m0qq"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qaup"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swf5k"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbogy"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhgla"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rt88"]
+atlas = ExtResource("3_3rnyv")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vfdmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8apua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t7m1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m0qq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qaup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swf5k")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbogy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhgla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rt88")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 12.0
+}]
 
 [node name="Projectile" type="Area2D" unique_id=1888702295]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_projscript")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=900713297]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_eyetex")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1411798696]
 shape = SubResource("RectangleShape2D_xh6v2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1007824563]
 stream = ExtResource("3_1cf02")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1083218622]
+scale = Vector2(0.16, 0.16)
+sprite_frames = SubResource("SpriteFrames_vfdmr")
+animation = &"fly"
