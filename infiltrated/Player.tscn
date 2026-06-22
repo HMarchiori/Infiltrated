@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://e6q6epxevit5" path="res://Player.gd" id="1_plscript"]
 [ext_resource type="PackedScene" uid="uid://dj62gaj2wrmfc" path="res://Projectile.tscn" id="2_projscene"]
 [ext_resource type="Texture2D" uid="uid://g71fk27qbcxv" path="res://Assets/player_spritesheet_gun.png" id="3_kne1u"]
+[ext_resource type="Script" uid="uid://dn4pq7enmptr1" path="res://EnemyPointer.gd" id="4_enmptr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rwas"]
 size = Vector2(35, 38)
@@ -350,3 +351,6 @@ zoom = Vector2(1.5, 1.5)
 [node name="StatsComponent" type="Node" parent="." unique_id=87154125]
 
 [node name="Weapon" type="Node" parent="." unique_id=975686145]
+
+[node name="EnemyPointer" type="Node2D" parent="."]
+script = ExtResource("4_enmptr")

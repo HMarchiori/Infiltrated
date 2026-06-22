@@ -15,9 +15,10 @@ func _ready() -> void:
 	EventBus.inimigo_morreu.connect(_on_inimigo_morreu)
 
 func spawnar(quantidade: int) -> void:
-	vivos = powerUP_count + enemy_count 
-	
-	var posicoes := _get_spawn_positions(vivos)
+	# Só inimigos contam para limpar a sala; power-ups não.
+	vivos = enemy_count
+
+	var posicoes := _get_spawn_positions(powerUP_count + enemy_count)
 	
 	for i in powerUP_count:
 		var cena: PackedScene
@@ -31,7 +32,7 @@ func spawnar(quantidade: int) -> void:
 			return
 
 		var power_ups: Node2D = cena.instantiate()
-		power_ups.global_position = posicoes[enemy_count + i - 1]
+		power_ups.global_position = posicoes[enemy_count + i]
 		get_parent().add_child(power_ups)
 	
 
