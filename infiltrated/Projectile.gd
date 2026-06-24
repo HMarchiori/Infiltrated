@@ -43,7 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	elif not from_player and body.is_in_group("player"):
 		body.receber_dano(dano)
 		_start_explode()
-	elif body is StaticBody2D:
+	elif body is StaticBody2D or body is TileMapLayer:
 		_start_explode()
 
 func _start_explode() -> void:

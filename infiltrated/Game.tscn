@@ -7,6 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psycho"]
 shader = ExtResource("4_psychoshader")
+shader_parameter/flash = 0.0
 
 [node name="Game" type="Node2D" unique_id=2026175410]
 script = ExtResource("1_gamescript")
@@ -92,7 +93,7 @@ theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 58
-text = "Sala Purificada!
-Dirija-se ao Portal"
+text = "Mansão Liberada!
+Volte ao Ponto de Partida."
 horizontal_alignment = 1
 vertical_alignment = 1

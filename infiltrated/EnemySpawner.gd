@@ -58,12 +58,21 @@ func _get_spawn_positions(count: int) -> Array[Vector2]:
 	var spawn_marker := get_parent().get_node("SpawnPoint") as Marker2D
 	var player_pos := spawn_marker.global_position if spawn_marker else Vector2.ZERO
 
+	# Camadas sólidas: nenhum spawn pode cair sobre uma parede ou decoração.
+	var bloqueadores: Array[TileMapLayer] = []
+	for layer_name in ["Walls", "Decoration"]:
+		var layer := get_parent().get_node_or_null(layer_name) as TileMapLayer
+		if layer:
+			bloqueadores.append(layer)
+
 	var cells := tilemap.get_used_cells()
 	cells.shuffle()
 
 	var result: Array[Vector2] = []
 	for cell in cells:
 		var world_pos := tilemap.to_global(tilemap.map_to_local(cell))
+		if _esta_bloqueado(world_pos, bloqueadores):
+			continue
 		if world_pos.distance_to(player_pos) >= min_dist_from_player:
 			result.append(world_pos)
 			if result.size() >= count:
@@ -74,6 +83,13 @@ func _get_spawn_positions(count: int) -> Array[Vector2]:
 		result.append(get_parent().global_position)
 
 	return result
+
+func _esta_bloqueado(world_pos: Vector2, layers: Array[TileMapLayer]) -> bool:
+	for layer in layers:
+		var c: Vector2i = layer.local_to_map(layer.to_local(world_pos))
+		if layer.get_cell_source_id(c) != -1:
+			return true
+	return false
 
 func _on_inimigo_morreu() -> void:
 	vivos -= 1
