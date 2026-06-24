@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cronne3df35vo"]
 
 [ext_resource type="Script" uid="uid://cgsj1novfv54w" path="res://power_up.gd" id="1_lbdsv"]
-[ext_resource type="Texture2D" uid="uid://dt3mfmje7ngl5" path="res://VFuIzO.png" id="2_mkoic"]
+[ext_resource type="Texture2D" uid="uid://622x1f3rana3" path="res://speed_power_up.png" id="2_mkoic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkoic"]
 size = Vector2(37, 31)

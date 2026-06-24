@@ -1,13 +1,18 @@
 extends Node2D
 
-## Seta que aparece após matar um inimigo e aponta para o inimigo vivo mais
-## próximo, ajudando a localizar os últimos restantes. Deve ser filho do Player.
+## Guia que aparece após matar um inimigo: para cada inimigo vivo desenha um
+## arco sobre um círculo imaginário ao redor do jogador, apontando a direção de
+## cada um por um breve instante. Deve ser filho do Player.
 
-@export var radius: float = 60.0       # distância da seta até o jogador
-@export var display_time: float = 3.0  # tempo visível após cada abate
-@export var color: Color = Color(1.0, 0.85, 0.2)
+@export var radius: float = 60.0          # raio do círculo imaginário
+@export var max_arrows: int = 3           # quantos inimigos mais próximos indicar
+@export var display_time: float = 2.5     # tempo visível após cada abate
+@export var arc_span_deg: float = 18.0    # largura angular de cada arco
+@export var thickness: float = 6.0        # espessura do arco
+@export var color: Color = Color(0.708, 0.184, 0.243, 1.0)
 
 var _timer: float = 0.0
+var _angles: PackedFloat32Array = PackedFloat32Array()
 
 func _ready() -> void:
 	visible = false
@@ -23,32 +28,37 @@ func _process(delta: float) -> void:
 		visible = false
 		return
 
-	var alvo := _nearest_enemy()
-	if alvo == null:
+	_angles = _enemy_angles()
+	if _angles.is_empty():
 		visible = false
 		_timer = 0.0
 		return
 
 	_timer -= delta
 	visible = true
-	rotation = (alvo.global_position - global_position).angle()
 	queue_redraw()
 
-func _nearest_enemy() -> Node2D:
-	var best: Node2D = null
-	var best_dist := INF
+func _enemy_angles() -> PackedFloat32Array:
+	# Coleta (distância, ângulo) dos inimigos vivos e mantém só os mais próximos.
+	var enemies: Array = []
 	for e in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(e):
 			continue
-		var d := global_position.distance_to(e.global_position)
-		if d < best_dist:
-			best_dist = d
-			best = e
-	return best
+		var offset: Vector2 = e.global_position - global_position
+		# Subtrai global_rotation para ficar correto mesmo se o pai girar.
+		enemies.append({"dist": offset.length(), "ang": offset.angle() - global_rotation})
+
+	enemies.sort_custom(func(a, b): return a.dist < b.dist)
+
+	var result := PackedFloat32Array()
+	for i in mini(max_arrows, enemies.size()):
+		result.append(enemies[i].ang)
+	return result
 
 func _draw() -> void:
-	# Triângulo apontando para +X local (o nó é rotacionado para o inimigo).
-	var tip := Vector2(radius + 16.0, 0.0)
-	var back_left := Vector2(radius, -9.0)
-	var back_right := Vector2(radius, 9.0)
-	draw_colored_polygon(PackedVector2Array([tip, back_left, back_right]), color)
+	# Some suavemente conforme o tempo restante acaba.
+	var alpha := clampf(_timer / display_time, 0.0, 1.0)
+	var c := Color(color.r, color.g, color.b, color.a * alpha)
+	var half := deg_to_rad(arc_span_deg) * 0.5
+	for ang in _angles:
+		draw_arc(Vector2.ZERO, radius, ang - half, ang + half, 12, c, thickness, true)

@@ -16,7 +16,7 @@ var _last_dir: Vector2 = Vector2.DOWN
 func _ready() -> void:
 	add_to_group("player")
 	EventBus.jogador_hp_alterado.emit(hp)
-	EventBus.powerUP.connect(powerUPFireRate)
+	EventBus.powerUP_speed.connect(powerUPSpeed)
 
 
 func _physics_process(delta: float) -> void:
@@ -88,6 +88,5 @@ func receber_dano(dano: int) -> void:
 	_invincibility_timer = invincibility_duration
 	EventBus.jogador_dano.emit()
 	
-func powerUPFireRate() -> void:
-	fire_rate = max(0.06, fire_rate - 0.03)
-	print(fire_rate)	
+func powerUPSpeed() -> void:
+	speed = min(450.0, speed + 30.0)

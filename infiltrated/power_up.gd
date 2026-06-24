@@ -1,11 +1,11 @@
 extends Area2D
 
 enum PowerUPType {
-	FIRE_RATE,
+	SPEED,
 	LIFE,
 }
 
-@export var power_up_type: int = PowerUPType.FIRE_RATE
+@export var power_up_type: int = PowerUPType.SPEED
 @export var health_amount: int = 1
 
 func _ready() -> void:
@@ -16,8 +16,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	match power_up_type:
-		PowerUPType.FIRE_RATE:
-			EventBus.powerUP.emit()
+		PowerUPType.SPEED:
+			EventBus.powerUP_speed.emit()
 		PowerUPType.LIFE:
 			body.hp += health_amount
 			EventBus.jogador_hp_alterado.emit(body.hp)

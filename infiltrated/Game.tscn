@@ -16,6 +16,7 @@ script = ExtResource("1_gamescript")
 
 [node name="Player" parent="." unique_id=2029011315 instance=ExtResource("3_playerscene")]
 position = Vector2(24, -9)
+speed = 300.0
 
 [node name="PostFX" type="CanvasLayer" parent="." unique_id=484539247]
 layer = 10
@@ -94,6 +95,8 @@ theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 58
 text = "Mansão Liberada!
-Volte ao Ponto de Partida."
+Volte ao Ponto de Partida
+para Escapar."
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3

@@ -6,4 +6,4 @@ signal jogador_morreu
 signal jogador_hp_alterado(hp_atual: int)
 signal jogador_dano
 signal you_won
-signal powerUP
+signal powerUP_speed
