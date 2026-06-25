@@ -17,9 +17,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 	match power_up_type:
 		PowerUPType.SPEED:
-			EventBus.powerUP_speed.emit()
+			EventBus.speed_powerup_collected.emit()
 		PowerUPType.LIFE:
 			body.hp += health_amount
-			EventBus.jogador_hp_alterado.emit(body.hp)
+			EventBus.player_hp_changed.emit(body.hp)
 
 	queue_free()

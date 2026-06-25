@@ -61,7 +61,7 @@ theme_override_colors/font_color = Color(1, 0.88, 0.88, 1)
 theme_override_colors/font_outline_color = Color(0.05, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 140
-text = "Você Perdeu"
+text = "You Lost"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -78,6 +78,6 @@ offset_right = 192.0
 offset_bottom = 159.20001
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-text = "Tente Novamente"
+text = "Try Again"
 
 [connection signal="pressed" from="CanvasLayer/Root/Button" to="." method="_on_button_pressed"]

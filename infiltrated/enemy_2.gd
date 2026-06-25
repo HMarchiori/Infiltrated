@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			_attack_timer -= delta
 
 			if _attack_timer <= 0.0:
-				_atacar()
+				_attack()
 				_attack_timer = attack_rate
 
 			if dist > attack_range * 1.2:
@@ -70,19 +70,19 @@ func _physics_process(delta: float) -> void:
 			_invincible = false
 			modulate.a = 1.0
 
-func _atacar() -> void:
+func _attack() -> void:
 	if player == null:
 		return
 
-	player.receber_dano(damage)
+	player.take_damage(damage)
 
-func receber_dano(dano: int) -> void:
+func take_damage(amount: int) -> void:
 	if _invincible:
 		return
-	hp -= dano
+	hp -= amount
 	if hp <= 0:
-		GameState.adicionar_pontos(150)
-		EventBus.inimigo_morreu.emit()
+		GameState.add_points(150)
+		EventBus.enemy_died.emit()
 		queue_free()
 		return
 	_invincible = true

@@ -1,11 +1,11 @@
 extends Node
 
 var score: int = 0
-var sala_atual: int = 1
+var current_room: int = 1
 
-func adicionar_pontos(valor: int) -> void:
-	score += valor
+func add_points(amount: int) -> void:
+	score += amount
 
-func resetar() -> void:
+func reset() -> void:
 	score = 0
-	sala_atual = 1
+	current_room = 1

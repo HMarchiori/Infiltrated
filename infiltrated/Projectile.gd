@@ -2,7 +2,7 @@ extends Area2D
 
 @export var speed: float = 450.0
 @export var lifetime: float = 2.5
-@export var dano: int = 1
+@export var damage: int = 1
 @onready var music: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -38,10 +38,10 @@ func _on_body_entered(body: Node2D) -> void:
 	if _exploding:
 		return
 	if from_player and body.is_in_group("enemies"):
-		body.receber_dano(dano)
+		body.take_damage(damage)
 		_start_explode()
 	elif not from_player and body.is_in_group("player"):
-		body.receber_dano(dano)
+		body.take_damage(damage)
 		_start_explode()
 	elif body is StaticBody2D or body is TileMapLayer:
 		_start_explode()

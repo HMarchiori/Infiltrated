@@ -6,11 +6,11 @@ extends Node2D
 @onready var portal_spawn: Marker2D = $ExitPortalSpawnPoint
 
 func _ready() -> void:
-	EventBus.sala_limpa.connect(_on_sala_limpa)
+	EventBus.room_cleared.connect(_on_room_cleared)
 	EventBus.you_won.connect(_on_you_won)
-	spawner.spawnar(spawner.enemy_count)
+	spawner.spawn(spawner.enemy_count)
 
-func _on_sala_limpa() -> void:
+func _on_room_cleared() -> void:
 	if portal_scene == null:
 		return
 	var portal: Node2D = portal_scene.instantiate()

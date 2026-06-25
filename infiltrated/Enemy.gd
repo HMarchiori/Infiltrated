@@ -47,14 +47,14 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			_fire_timer -= delta
 			if _fire_timer <= 0.0:
-				_atirar()
+				_shoot()
 				_fire_timer = fire_rate
 			if dist > attack_range * 1.2:
 				state = State.CHASE
 
 	
 
-func _atirar() -> void:
+func _shoot() -> void:
 	if bullet_scene == null or player == null:
 		return
 	var bullet: Node2D = bullet_scene.instantiate()
@@ -63,12 +63,12 @@ func _atirar() -> void:
 	bullet.from_player = false
 	get_tree().current_scene.add_child(bullet)
 
-func receber_dano(dano: int) -> void:
+func take_damage(amount: int) -> void:
 	if _invincible:
 		return
-	hp -= dano
+	hp -= amount
 	if hp <= 0:
-		GameState.adicionar_pontos(100)
-		EventBus.inimigo_morreu.emit()
+		GameState.add_points(100)
+		EventBus.enemy_died.emit()
 		queue_free()
 		return

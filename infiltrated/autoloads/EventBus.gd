@@ -1,9 +1,9 @@
 extends Node
 
-signal inimigo_morreu
-signal sala_limpa
-signal jogador_morreu
-signal jogador_hp_alterado(hp_atual: int)
-signal jogador_dano
+signal enemy_died
+signal room_cleared
+signal player_died
+signal player_hp_changed(current_hp: int)
+signal player_damaged
 signal you_won
-signal powerUP_speed
+signal speed_powerup_collected

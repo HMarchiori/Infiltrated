@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var fire_rate: float = 0.35
 @export var hp: int = 5
 @export var bullet_scene: PackedScene
-@export var invincibility_duration: float = 2
+@export var invincibility_duration: float = 2.0
 
 var _invincible: bool = false
 var _invincibility_timer: float = 0.0
@@ -15,8 +15,8 @@ var _last_dir: Vector2 = Vector2.DOWN
 
 func _ready() -> void:
 	add_to_group("player")
-	EventBus.jogador_hp_alterado.emit(hp)
-	EventBus.powerUP_speed.connect(powerUPSpeed)
+	EventBus.player_hp_changed.emit(hp)
+	EventBus.speed_powerup_collected.connect(_on_speed_powerup)
 
 
 func _physics_process(delta: float) -> void:
@@ -75,18 +75,18 @@ func _shoot() -> void:
 	bullet.from_player = true
 	get_tree().current_scene.add_child(bullet)
 
-func receber_dano(dano: int) -> void:
+func take_damage(amount: int) -> void:
 	if _invincible:
 		return
-	hp -= dano
-	EventBus.jogador_hp_alterado.emit(hp)
+	hp -= amount
+	EventBus.player_hp_changed.emit(hp)
 	if hp <= 0:
-		EventBus.jogador_morreu.emit()
+		EventBus.player_died.emit()
 		queue_free()
 		return
 	_invincible = true
 	_invincibility_timer = invincibility_duration
-	EventBus.jogador_dano.emit()
-	
-func powerUPSpeed() -> void:
+	EventBus.player_damaged.emit()
+
+func _on_speed_powerup() -> void:
 	speed = min(450.0, speed + 30.0)

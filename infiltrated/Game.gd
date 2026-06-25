@@ -19,13 +19,13 @@ func _ready() -> void:
 	var spawn := room.get_node("SpawnPoint") as Marker2D
 	player.global_position = spawn.global_position
 
-	EventBus.jogador_morreu.connect(_on_jogador_morreu)
-	EventBus.inimigo_morreu.connect(_on_inimigo_morreu)
-	EventBus.sala_limpa.connect(_on_sala_limpa)
-	EventBus.jogador_hp_alterado.connect(_on_jogador_hp_alterado)
-	EventBus.jogador_dano.connect(_on_jogador_dano)
-	_on_jogador_hp_alterado(player.hp)
-	_atualizar_hud()
+	EventBus.player_died.connect(_on_player_died)
+	EventBus.enemy_died.connect(_on_enemy_died)
+	EventBus.room_cleared.connect(_on_room_cleared)
+	EventBus.player_hp_changed.connect(_on_player_hp_changed)
+	EventBus.player_damaged.connect(_on_player_damaged)
+	_on_player_hp_changed(player.hp)
+	_update_hud()
 
 	# Smoky, ghostly environment rendered behind the world tiles.
 	var smoke_layer := CanvasLayer.new()
@@ -45,35 +45,35 @@ func _process(delta: float) -> void:
 	time_left = max(0.0, time_left - delta)
 	var mins := int(time_left) / 60
 	var secs := int(time_left) % 60
-	hud_timer.text = "Tempo: %d:%02d" % [mins, secs]
+	hud_timer.text = "Time: %d:%02d" % [mins, secs]
 	if time_left <= 30.0:
 		hud_timer.add_theme_color_override("font_color", Color(1.0, 0.2, 0.1, 1.0))
-	if time_left == 0.0:
-		_on_jogador_morreu()
+	if time_left <= 0.0:
+		_on_player_died()
 
-func _on_jogador_morreu() -> void:
+func _on_player_died() -> void:
 	if _game_over:
 		return
 	_game_over = true
 	get_tree().call_deferred("change_scene_to_file", "res://youLost.tscn")
 
-func _on_inimigo_morreu() -> void:
-	_atualizar_hud()
+func _on_enemy_died() -> void:
+	_update_hud()
 
-func _on_sala_limpa() -> void:
-	_atualizar_hud()
+func _on_room_cleared() -> void:
+	_update_hud()
 	var tween := create_tween()
 	tween.tween_property(room_clear_banner, "modulate:a", 1.0, 0.6)
 
-func _on_jogador_dano() -> void:
+func _on_player_damaged() -> void:
 	# Subtle red damage flash through the existing PostFX shader.
 	_psycho_material.set_shader_parameter("flash", 0.35)
 	var tween := create_tween()
 	tween.tween_property(_psycho_material, "shader_parameter/flash", 0.0, 0.3)
 
-func _on_jogador_hp_alterado(hp_atual: int) -> void:
-	hud_lives.text = "❤ ".repeat(max(0, hp_atual)).strip_edges()
+func _on_player_hp_changed(current_hp: int) -> void:
+	hud_lives.text = "❤ ".repeat(max(0, current_hp)).strip_edges()
 
-func _atualizar_hud() -> void:
+func _update_hud() -> void:
 	hud_label.text = "Score: %d" % GameState.score
-	hud_enemies.text = "Inimigos: %d" % enemy_spawner.vivos
+	hud_enemies.text = "Enemies: %d" % enemy_spawner.alive_count

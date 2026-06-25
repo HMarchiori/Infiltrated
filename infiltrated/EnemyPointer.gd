@@ -1,14 +1,14 @@
 extends Node2D
 
-## Guia que aparece após matar um inimigo: para cada inimigo vivo desenha um
-## arco sobre um círculo imaginário ao redor do jogador, apontando a direção de
-## cada um por um breve instante. Deve ser filho do Player.
+## Guide that appears after killing an enemy: for each living enemy it draws an
+## arc on an imaginary circle around the player, pointing toward each one for a
+## brief moment. Must be a child of the Player.
 
-@export var radius: float = 60.0          # raio do círculo imaginário
-@export var max_arrows: int = 3           # quantos inimigos mais próximos indicar
-@export var display_time: float = 2.5     # tempo visível após cada abate
-@export var arc_span_deg: float = 18.0    # largura angular de cada arco
-@export var thickness: float = 6.0        # espessura do arco
+@export var radius: float = 60.0          # radius of the imaginary circle
+@export var max_arrows: int = 3           # how many nearest enemies to indicate
+@export var display_time: float = 2.5     # time visible after each kill
+@export var arc_span_deg: float = 18.0    # angular width of each arc
+@export var thickness: float = 6.0        # arc thickness
 @export var color: Color = Color(0.708, 0.184, 0.243, 1.0)
 
 var _timer: float = 0.0
@@ -17,10 +17,10 @@ var _angles: PackedFloat32Array = PackedFloat32Array()
 func _ready() -> void:
 	visible = false
 	z_index = 100
-	EventBus.inimigo_morreu.connect(_on_inimigo_morreu)
+	EventBus.enemy_died.connect(_on_enemy_died)
 
-func _on_inimigo_morreu() -> void:
-	# Reinicia a contagem a cada abate.
+func _on_enemy_died() -> void:
+	# Restart the countdown on each kill.
 	_timer = display_time
 
 func _process(delta: float) -> void:
@@ -39,13 +39,13 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _enemy_angles() -> PackedFloat32Array:
-	# Coleta (distância, ângulo) dos inimigos vivos e mantém só os mais próximos.
+	# Collect (distance, angle) of living enemies and keep only the nearest ones.
 	var enemies: Array = []
 	for e in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(e):
 			continue
 		var offset: Vector2 = e.global_position - global_position
-		# Subtrai global_rotation para ficar correto mesmo se o pai girar.
+		# Subtract global_rotation so it stays correct even if the parent rotates.
 		enemies.append({"dist": offset.length(), "ang": offset.angle() - global_rotation})
 
 	enemies.sort_custom(func(a, b): return a.dist < b.dist)
@@ -56,7 +56,7 @@ func _enemy_angles() -> PackedFloat32Array:
 	return result
 
 func _draw() -> void:
-	# Some suavemente conforme o tempo restante acaba.
+	# Fade out smoothly as the remaining time runs out.
 	var alpha := clampf(_timer / display_time, 0.0, 1.0)
 	var c := Color(color.r, color.g, color.b, color.a * alpha)
 	var half := deg_to_rad(arc_span_deg) * 0.5
