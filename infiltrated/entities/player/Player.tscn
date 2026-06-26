@@ -346,11 +346,11 @@ sprite_frames = SubResource("SpriteFrames_6efpq")
 animation = &"walk_s"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=1788755235]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.8, 1.8)
 
 [node name="StatsComponent" type="Node" parent="." unique_id=87154125]
 
 [node name="Weapon" type="Node" parent="." unique_id=975686145]
 
-[node name="EnemyPointer" type="Node2D" parent="."]
+[node name="EnemyPointer" type="Node2D" parent="." unique_id=1873933408]
 script = ExtResource("4_enmptr")

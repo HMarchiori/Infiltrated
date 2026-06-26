@@ -10,7 +10,7 @@ uniform float wisp = 0.7;
 // How much of the screen the wisps cover (higher = thicker fog).
 uniform float density : hint_range(0.0, 1.0) = 0.88;
 // Pixelation grid: lower = chunkier pixels.
-uniform float pixels = 120.0;
+uniform float pixels = 250.0;
 
 float hash(vec2 p) {
 	p = fract(p * vec2(123.34, 456.21));

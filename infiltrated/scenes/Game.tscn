@@ -34,48 +34,50 @@ layer = 128
 [node name="ScoreLabel" type="Label" parent="HUD" unique_id=1538594647]
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 600.0
-offset_bottom = 65.0
+offset_right = 750.0
+offset_bottom = 100.0
 theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
 text = "Score: 0"
 
 [node name="EnemiesLabel" type="Label" parent="HUD" unique_id=1538594649]
 offset_left = 10.0
-offset_top = 65.0
-offset_right = 600.0
-offset_bottom = 120.0
+offset_top = 100.0
+offset_right = 750.0
+offset_bottom = 190.0
 theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
 text = "Enemies: 0"
 
 [node name="LivesLabel" type="Label" parent="HUD" unique_id=1538594648]
 offset_left = 10.0
-offset_top = 120.0
-offset_right = 400.0
-offset_bottom = 175.0
+offset_top = 190.0
+offset_right = 750.0
+offset_bottom = 280.0
 theme_override_colors/font_color = Color(0.92, 0.12, 0.08, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 72
 text = "❤ ❤ ❤"
+autowrap_mode = 2
+autowrap_trim_flags = 128
 
 [node name="TimerLabel" type="Label" parent="HUD" unique_id=1575295983]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
+offset_left = -300.0
 offset_top = 10.0
-offset_right = 200.0
-offset_bottom = 65.0
+offset_right = 300.0
+offset_bottom = 130.0
 theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 72
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 100
 text = "Time: 3:00"
 horizontal_alignment = 1
 
@@ -86,14 +88,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -60.0
-offset_right = 500.0
-offset_bottom = 60.0
+offset_left = -750.0
+offset_top = -90.0
+offset_right = 750.0
+offset_bottom = 90.0
 theme_override_colors/font_color = Color(0.88, 0.76, 0.42, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 58
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 84
 text = "Mansion Cleared!
 Return to the Starting Point
 to Escape."
