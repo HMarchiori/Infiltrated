@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://c2447ho10j566"]
 
-[ext_resource type="Script" uid="uid://bshse238qkk6n" path="res://enemy_2.gd" id="1_mym6m"]
-[ext_resource type="Texture2D" uid="uid://uxel2xa5fcfx" path="res://20_boss_matriarch.png" id="2_3n2en"]
+[ext_resource type="Script" uid="uid://bshse238qkk6n" path="res://entities/enemies/melee_enemy.gd" id="1_yk7bf"]
+[ext_resource type="Texture2D" uid="uid://uxel2xa5fcfx" path="res://Assets/20_boss_matriarch.png" id="2_b1qlq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3buae"]
 size = Vector2(35, 28)
 
 [node name="Enemy2" type="CharacterBody2D" unique_id=1378442227]
-script = ExtResource("1_mym6m")
+collision_layer = 4
+script = ExtResource("1_yk7bf")
+speed = 150.0
+attack_range = 50.0
+score_value = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1570590873]
 position = Vector2(0.5, -1)
@@ -15,4 +19,4 @@ shape = SubResource("RectangleShape2D_3buae")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628778819]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_3n2en")
+texture = ExtResource("2_b1qlq")

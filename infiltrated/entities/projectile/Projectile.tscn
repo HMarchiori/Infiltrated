@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dj62gaj2wrmfc"]
 
-[ext_resource type="Script" uid="uid://bvxgrxsl3wmm2" path="res://Projectile.gd" id="1_projscript"]
+[ext_resource type="Script" uid="uid://bvxgrxsl3wmm2" path="res://entities/projectile/Projectile.gd" id="1_projscript"]
 [ext_resource type="AudioStream" uid="uid://bxaw15kuj5t5e" path="res://Assets/eaglaxle-gun-shot-1-530788.mp3" id="3_1cf02"]
 [ext_resource type="Texture2D" uid="uid://d4jqkwqu2cqn2" path="res://Assets/illuminati_bullet_spritesheet.png" id="3_3rnyv"]
 

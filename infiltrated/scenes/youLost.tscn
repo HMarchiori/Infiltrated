@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxhk66qy52x6h"]
 
-[ext_resource type="Script" uid="uid://6720ht4s1uoq" path="res://you_won.gd" id="1_b45bt"]
+[ext_resource type="Script" uid="uid://6720ht4s1uoq" path="res://scenes/you_won.gd" id="1_b45bt"]
 [ext_resource type="Texture2D" uid="uid://di1s1gk5yxf5x" path="res://Assets/bllod.png" id="2_blood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]

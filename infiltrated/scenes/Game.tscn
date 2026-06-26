@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://0fdtj6k827oj"]
 
-[ext_resource type="Script" uid="uid://cyocoimkt2wgy" path="res://Game.gd" id="1_gamescript"]
-[ext_resource type="PackedScene" uid="uid://djy0t2gsp56b1" path="res://Room.tscn" id="2_roomscene"]
-[ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://Player.tscn" id="3_playerscene"]
-[ext_resource type="Shader" uid="uid://36t8ladevmrv" path="res://psycho_overlay.gdshader" id="4_psychoshader"]
+[ext_resource type="Script" uid="uid://cyocoimkt2wgy" path="res://scenes/Game.gd" id="1_gamescript"]
+[ext_resource type="PackedScene" uid="uid://djy0t2gsp56b1" path="res://scenes/Room.tscn" id="2_roomscene"]
+[ext_resource type="PackedScene" uid="uid://baeg0weytkeyi" path="res://entities/player/Player.tscn" id="3_playerscene"]
+[ext_resource type="Shader" uid="uid://36t8ladevmrv" path="res://shaders/psycho_overlay.gdshader" id="4_psychoshader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psycho"]
 shader = ExtResource("4_psychoshader")

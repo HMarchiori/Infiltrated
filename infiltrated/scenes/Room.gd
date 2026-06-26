@@ -8,7 +8,7 @@ extends Node2D
 func _ready() -> void:
 	EventBus.room_cleared.connect(_on_room_cleared)
 	EventBus.you_won.connect(_on_you_won)
-	spawner.spawn(spawner.enemy_count)
+	spawner.spawn()
 
 func _on_room_cleared() -> void:
 	if portal_scene == null:
@@ -18,4 +18,4 @@ func _on_room_cleared() -> void:
 	call_deferred("add_child", portal)
 
 func _on_you_won() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://you_won.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/you_won.tscn")

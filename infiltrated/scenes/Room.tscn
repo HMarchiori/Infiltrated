@@ -1,18 +1,19 @@
 [gd_scene format=4 uid="uid://djy0t2gsp56b1"]
 
-[ext_resource type="PackedScene" uid="uid://c2447ho10j566" path="res://Enemy2.tscn" id="5_4v3hs"]
-[ext_resource type="PackedScene" uid="uid://cronne3df35vo" path="res://power_up.tscn" id="6_yc6jp"]
+[ext_resource type="PackedScene" uid="uid://c2447ho10j566" path="res://entities/enemies/MeleeEnemy.tscn" id="5_4v3hs"]
+[ext_resource type="PackedScene" uid="uid://cronne3df35vo" path="res://entities/pickups/power_up.tscn" id="6_yc6jp"]
 [ext_resource type="AudioStream" uid="uid://d2wly4iwgy7ol" path="res://Assets/ivan_luzan-epic-hybrid-logo-157092.mp3" id="9_4v3hs"]
+[ext_resource type="AudioStream" uid="uid://dqiw1ka6tdbem" path="res://Assets/atlasaudio-suspense-tension-511877.mp3" id="9_582ws"]
 [ext_resource type="Texture2D" uid="uid://h0ubdosbq7kl" path="res://Assets/tileset_floors_dark_32.png" id="9_yc6jp"]
 [ext_resource type="Texture2D" uid="uid://c2ny13ddmms34" path="res://Assets/furniture_mansion_32.png" id="10_1kin1"]
 [ext_resource type="Texture2D" uid="uid://dlm72r52axme5" path="res://Assets/tileset_walls_borders_wood.png" id="11_1kin1"]
-[ext_resource type="Texture2D" uid="uid://djbirg8r7ntkv" path="res://amo.png" id="12_6vgh5"]
+[ext_resource type="Texture2D" uid="uid://djbirg8r7ntkv" path="res://Assets/amo.png" id="12_6vgh5"]
 [ext_resource type="Texture2D" uid="uid://bip2mx81xnt54" path="res://Assets/tileset_carpet_red.png" id="12_hwkqq"]
-[ext_resource type="PackedScene" uid="uid://cltibw3ejn6ba" path="res://Enemy.tscn" id="Enemy_scene"]
-[ext_resource type="PackedScene" uid="uid://healthpw1" path="res://health_power_up.tscn" id="HealthPowerUp_scene"]
-[ext_resource type="PackedScene" uid="uid://d1y516ahtqlo5" path="res://ExitPortal.tscn" id="Portal_scene"]
-[ext_resource type="Script" uid="uid://p5hm3rnb406f" path="res://Room.gd" id="Room_script"]
-[ext_resource type="Script" uid="uid://bxh336md0djph" path="res://EnemySpawner.gd" id="Spawner_script"]
+[ext_resource type="PackedScene" uid="uid://cltibw3ejn6ba" path="res://entities/enemies/RangedEnemy.tscn" id="Enemy_scene"]
+[ext_resource type="PackedScene" uid="uid://healthpw1" path="res://entities/pickups/health_power_up.tscn" id="HealthPowerUp_scene"]
+[ext_resource type="PackedScene" uid="uid://d1y516ahtqlo5" path="res://entities/portal/ExitPortal.tscn" id="Portal_scene"]
+[ext_resource type="Script" uid="uid://p5hm3rnb406f" path="res://scenes/Room.gd" id="Room_script"]
+[ext_resource type="Script" uid="uid://bxh336md0djph" path="res://entities/enemies/EnemySpawner.gd" id="Spawner_script"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6vgh5"]
 texture = ExtResource("9_yc6jp")
@@ -5584,7 +5585,8 @@ portal_scene = ExtResource("Portal_scene")
 
 [node name="EnemySpawner" type="Node" parent="." unique_id=129418504]
 script = ExtResource("Spawner_script")
-powerUP_count = 10
+enemy_count = 1
+powerup_count = 10
 min_dist_from_player = 500.0
 ranged_enemy_scene = ExtResource("Enemy_scene")
 melee_enemy_scene = ExtResource("5_4v3hs")
@@ -5598,11 +5600,18 @@ position = Vector2(3, 4)
 z_index = 1
 position = Vector2(-7, -1)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=65780727]
+[node name="Intro" type="AudioStreamPlayer" parent="." unique_id=65780727]
 stream = ExtResource("9_4v3hs")
 volume_db = 4.96
 pitch_scale = 0.4
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=963380003]
+stream = ExtResource("9_582ws")
+volume_db = 10.461
+pitch_scale = 0.79
 autoplay = true
+mix_target = 1
+parameters/looping = false
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=2059313437]
 scale = Vector2(2, 2)

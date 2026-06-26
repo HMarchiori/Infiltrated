@@ -35,7 +35,7 @@ func _ready() -> void:
 	smoke_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	smoke_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var smoke_material := ShaderMaterial.new()
-	smoke_material.shader = load("res://hud_smoke.gdshader")
+	smoke_material.shader = load("res://shaders/hud_smoke.gdshader")
 	smoke_rect.material = smoke_material
 	smoke_layer.add_child(smoke_rect)
 
@@ -55,7 +55,9 @@ func _on_player_died() -> void:
 	if _game_over:
 		return
 	_game_over = true
-	get_tree().call_deferred("change_scene_to_file", "res://youLost.tscn")
+	# Brief pause so the death registers before the screen changes.
+	await get_tree().create_timer(game_over_delay).timeout
+	get_tree().change_scene_to_file("res://scenes/youLost.tscn")
 
 func _on_enemy_died() -> void:
 	_update_hud()

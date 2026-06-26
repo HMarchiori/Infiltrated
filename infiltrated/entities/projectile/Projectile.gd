@@ -1,6 +1,7 @@
+class_name Projectile
 extends Area2D
 
-@export var speed: float = 450.0
+@export var speed: float = 450
 @export var lifetime: float = 2.5
 @export var damage: int = 1
 @onready var music: AudioStreamPlayer = $AudioStreamPlayer
@@ -15,11 +16,11 @@ var _exploding: bool = false
 func _ready() -> void:
 	music.play()
 	if from_player:
-		collision_layer = 8
-		collision_mask = 4 | 1
+		collision_layer = Layers.PLAYER_PROJECTILE
+		collision_mask = Layers.ENEMY | Layers.ENVIRONMENT
 	else:
-		collision_layer = 16
-		collision_mask = 2 | 1
+		collision_layer = Layers.ENEMY_PROJECTILE
+		collision_mask = Layers.PLAYER | Layers.ENVIRONMENT
 	body_entered.connect(_on_body_entered)
 
 	_sprite.rotation = direction.angle()

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cltibw3ejn6ba"]
 
-[ext_resource type="Script" uid="uid://by4ot1edxp8fm" path="res://Enemy.gd" id="1_enscript"]
-[ext_resource type="PackedScene" uid="uid://dj62gaj2wrmfc" path="res://Projectile.tscn" id="2_projscene"]
-[ext_resource type="Texture2D" uid="uid://cgcxn0en4v26w" path="res://05_inquisitor.png" id="3_2hac7"]
+[ext_resource type="Script" uid="uid://by4ot1edxp8fm" path="res://entities/enemies/ranged_enemy.gd" id="1_enscript"]
+[ext_resource type="PackedScene" uid="uid://dj62gaj2wrmfc" path="res://entities/projectile/Projectile.tscn" id="2_projscene"]
+[ext_resource type="Texture2D" uid="uid://qecgxx1vbs1k" path="res://Assets/05_inquisitor.png" id="3_2hac7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enemy"]
 size = Vector2(40, 40)

@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 250.0
@@ -73,6 +74,7 @@ func _shoot() -> void:
 	bullet.global_position = global_position
 	bullet.direction = _last_dir
 	bullet.from_player = true
+	bullet.speed = speed + 150
 	get_tree().current_scene.add_child(bullet)
 
 func take_damage(amount: int) -> void:

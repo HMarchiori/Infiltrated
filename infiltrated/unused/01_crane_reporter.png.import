@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnyebpr44sg0b"
-path="res://.godot/imported/01_crane_reporter.png-0b77d990c381f0b02df581aa362d2556.ctex"
+path="res://.godot/imported/01_crane_reporter.png-b478816cb3c5cf094517bc33f79835b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://01_crane_reporter.png"
-dest_files=["res://.godot/imported/01_crane_reporter.png-0b77d990c381f0b02df581aa362d2556.ctex"]
+source_file="res://unused/01_crane_reporter.png"
+dest_files=["res://.godot/imported/01_crane_reporter.png-b478816cb3c5cf094517bc33f79835b7.ctex"]
 
 [params]
 
